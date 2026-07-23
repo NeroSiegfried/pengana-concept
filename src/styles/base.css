@@ -1,0 +1,272 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-width: 320px;
+  overflow-x: clip;
+  color: var(--ink);
+  background: var(--paper-bright);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body.menu-is-open {
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  color: inherit;
+  font: inherit;
+}
+
+button {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+address {
+  font-style: normal;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(4rem, 9vw, 9rem);
+}
+
+h2 {
+  font-size: clamp(3rem, 6vw, 6.5rem);
+}
+
+h3 {
+  font-size: clamp(1.75rem, 2.5vw, 3rem);
+}
+
+p {
+  text-wrap: pretty;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+::selection {
+  color: white;
+  background: var(--accent);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.page {
+  position: relative;
+  min-height: 70vh;
+  background: var(--paper-bright);
+}
+
+.page:focus {
+  outline: none;
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.eyebrow--light {
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--unit);
+}
+
+.action {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(var(--unit) * 4);
+  padding: 12px 18px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  transition:
+    gap 350ms var(--ease-out),
+    background-color 250ms ease,
+    border-color 250ms ease,
+    color 250ms ease;
+}
+
+.action:hover {
+  gap: calc(var(--unit) * 5);
+}
+
+.action--solid {
+  color: white;
+  background: var(--accent);
+}
+
+.action--solid:hover {
+  background: var(--deep);
+}
+
+.action--light {
+  color: var(--ink);
+  background: white;
+}
+
+.action--light:hover {
+  background: var(--pale);
+}
+
+.action--glass {
+  color: white;
+  border-color: var(--light-line);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+}
+
+.action--glass:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.action--line {
+  min-height: 40px;
+  padding-inline: 0;
+  border-bottom: 1px solid currentColor;
+  border-radius: 0;
+}
+
+.action__arrow {
+  font-size: 1rem;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 800ms var(--ease-out),
+    transform 900ms var(--ease-out);
+}
+
+.reveal[data-delay="1"] {
+  transition-delay: 80ms;
+}
+
+.reveal[data-delay="2"] {
+  transition-delay: 160ms;
+}
+
+.reveal[data-delay="3"] {
+  transition-delay: 240ms;
+}
+
+.reveal[data-delay="4"] {
+  transition-delay: 320ms;
+}
+
+.reveal[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    font-size: 15px;
+  }
+
+  h1 {
+    font-size: clamp(3.5rem, 17vw, 5.75rem);
+  }
+
+  h2 {
+    font-size: clamp(2.75rem, 13vw, 4.6rem);
+  }
+
+  .action {
+    min-height: 46px;
+    padding-inline: 16px;
+  }
+}

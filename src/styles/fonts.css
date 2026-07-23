@@ -1,0 +1,23 @@
+@font-face {
+  font-family: "Pengana Display";
+  src: url("/fonts/playfair-display-400.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pengana Display";
+  src: url("/fonts/playfair-display-500.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pengana Display";
+  src: url("/fonts/playfair-display-600.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}

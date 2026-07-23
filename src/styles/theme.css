@@ -1,0 +1,64 @@
+:root {
+  --unit: 8px;
+  --header-height: 72px;
+  --business-nav-height: 52px;
+  --gutter: clamp(16px, 2.5vw, 40px);
+  --section-space: clamp(96px, 11vw, 176px);
+  --content-max: 1680px;
+
+  --paper: #f4f1e9;
+  --paper-bright: #fbfaf7;
+  --ink: #15191e;
+  --muted: #62666a;
+  --line: rgba(21, 25, 30, 0.18);
+  --light-line: rgba(255, 255, 255, 0.28);
+
+  --group-accent: #456079;
+  --group-deep: #101b26;
+  --group-pale: #dfe7ed;
+
+  --properties-accent: #9a6848;
+  --properties-deep: #281b15;
+  --properties-pale: #eadfd4;
+
+  --tishino-accent: #617149;
+  --tishino-deep: #1c2417;
+  --tishino-pale: #e3e4d3;
+
+  --accent: var(--group-accent);
+  --deep: var(--group-deep);
+  --pale: var(--group-pale);
+
+  --font-display: "Pengana Display", "Times New Roman", serif;
+  --font-ui:
+    "Helvetica Neue", "Neue Haas Grotesk Text Pro", "Nimbus Sans", Arial,
+    sans-serif;
+
+  --shadow-nav: 0 12px 40px rgba(15, 20, 25, 0.1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-site="concept"] {
+  --accent: var(--group-accent);
+  --deep: var(--group-deep);
+  --pale: var(--group-pale);
+}
+
+[data-site="properties"] {
+  --accent: var(--properties-accent);
+  --deep: var(--properties-deep);
+  --pale: var(--properties-pale);
+}
+
+[data-site="tishino"] {
+  --accent: var(--tishino-accent);
+  --deep: var(--tishino-deep);
+  --pale: var(--tishino-pale);
+}
+
+@media (max-width: 959px) {
+  :root {
+    --header-height: 64px;
+    --business-nav-height: 48px;
+  }
+}
