@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { FORM_ENDPOINT, GROUP } from "../../content/company.js";
+import { ActionContent } from "../ui/ActionLink.jsx";
 
 export default function ContactForm({
   recipient = GROUP.name,
@@ -96,8 +97,7 @@ export default function ContactForm({
             className="action action--ghost"
             onClick={() => setStatus("idle")}
           >
-            <span>Send another enquiry</span>
-            <span className="action__arrow" aria-hidden="true">→</span>
+            <ActionContent variant="ghost">Send another enquiry</ActionContent>
           </button>
         </div>
       </div>
@@ -187,8 +187,9 @@ export default function ContactForm({
             className="action action--solid"
             disabled={status === "sending"}
           >
-            <span>{status === "sending" ? "Sending…" : submitLabel}</span>
-            <span className="action__arrow" aria-hidden="true">→</span>
+            <ActionContent variant="solid">
+              {status === "sending" ? "Sending…" : submitLabel}
+            </ActionContent>
           </button>
           <p className="contact-form__privacy">
             Your details are used only to respond to this enquiry.

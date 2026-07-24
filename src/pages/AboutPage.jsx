@@ -6,6 +6,7 @@ import {
   TypeHero,
 } from "../components/blocks/EditorialBlocks.jsx";
 import PageFrame from "../components/chrome/PageFrame.jsx";
+import { Arrow } from "../components/ui/icons.jsx";
 import Reveal from "../components/ui/Reveal.jsx";
 import { BUSINESSES } from "../content/businesses.js";
 import { GROUP, GROUP_LEADERSHIP } from "../content/company.js";
@@ -98,7 +99,9 @@ export default function AboutPage() {
               <h2>{business.name}</h2>
               <p>{business.summary}</p>
             </div>
-            <span aria-hidden="true">↗</span>
+            <span className="structure-list__arrow" aria-hidden="true">
+              <Arrow className="ui-arrow" />
+            </span>
           </Reveal>
         ))}
       </section>

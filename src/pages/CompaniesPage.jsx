@@ -108,6 +108,17 @@ const ENTRIES = [
   },
 ];
 
+// A deliberate mix of treatment (exaggerated radius vs. angled chamfer) and
+// position so a five-image mosaic never reads as a uniform, cookie-cutter grid.
+// Lower-left is left alone — that corner carries the caption pill.
+const CORNERS = [
+  "img-cut--tl",
+  "img-chamfer--tr",
+  "img-cut--br",
+  "img-chamfer--tl",
+  "img-cut--tr",
+];
+
 export default function CompaniesPage() {
   return (
     <PageFrame site="concept" title="Businesses">
@@ -139,7 +150,7 @@ export default function CompaniesPage() {
               <div className="company-index__mosaic-row company-index__mosaic-row--top">
                 {images.slice(0, 2).map((image, imageIndex) => (
                   <figure
-                    className="company-index__image company-index__image--tile"
+                    className={`company-index__image company-index__image--tile ${CORNERS[imageIndex]}`}
                     key={image.src}
                   >
                     <img
@@ -155,7 +166,7 @@ export default function CompaniesPage() {
                 ))}
               </div>
 
-              <figure className="company-index__image company-index__image--panorama">
+              <figure className={`company-index__image company-index__image--panorama ${CORNERS[2]}`}>
                 <img src={images[2].src} alt={images[2].alt} loading="lazy" />
                 <figcaption className="company-index__caption">
                   <span>03</span>
@@ -166,7 +177,7 @@ export default function CompaniesPage() {
               <div className="company-index__mosaic-row company-index__mosaic-row--bottom">
                 {images.slice(3).map((image, imageIndex) => (
                   <figure
-                    className="company-index__image company-index__image--tile"
+                    className={`company-index__image company-index__image--tile ${CORNERS[imageIndex + 3]}`}
                     key={image.src}
                   >
                     <img src={image.src} alt={image.alt} loading="lazy" />

@@ -6,6 +6,7 @@ import {
 } from "../components/blocks/EditorialBlocks.jsx";
 import PageFrame from "../components/chrome/PageFrame.jsx";
 import ActionLink from "../components/ui/ActionLink.jsx";
+import { Arrow, Caret } from "../components/ui/icons.jsx";
 import Reveal from "../components/ui/Reveal.jsx";
 import { BUSINESSES } from "../content/businesses.js";
 import { GROUP } from "../content/company.js";
@@ -16,6 +17,10 @@ const BUSINESS_CARDS = [
   { ...BUSINESSES.tishino, image: IMAGES.tishino.hero },
   { ...BUSINESSES.sunab, image: IMAGES.sunab.hero },
 ];
+
+// Mixed treatment and position. Lower-left is the mobile cutout plate; the
+// chamfer sits at the free lower-right so it never clips the index or arrow.
+const CARD_CORNERS = ["img-cut--tl", "img-cut--tr", "img-chamfer--br"];
 
 export default function HomePage() {
   return (
@@ -50,7 +55,7 @@ export default function HomePage() {
         </Reveal>
         <a className="scroll-cue" href="#introduction">
           <span>Scroll</span>
-          <span aria-hidden="true">↓</span>
+          <Caret className="scroll-cue__caret" />
         </a>
       </section>
 
@@ -80,7 +85,7 @@ export default function HomePage() {
         <div className="showcase">
           {BUSINESS_CARDS.map((business, index) => (
             <Link
-              className={`acc-card acc-card--${business.id}`}
+              className={`acc-card acc-card--${business.id} ${CARD_CORNERS[index]}`}
               to={business.route}
               data-business={business.id}
               key={business.id}
@@ -94,7 +99,7 @@ export default function HomePage() {
                 <p className="acc-card__sub">{business.summary}</p>
               </div>
               <span className="acc-card__arrow" aria-hidden="true">
-                ↗
+                <Arrow className="ui-arrow" />
               </span>
             </Link>
           ))}
@@ -115,7 +120,7 @@ export default function HomePage() {
           <strong>Nigeria</strong>
         </div>
         <Link to="/contact">
-          Office details <span aria-hidden="true">↗</span>
+          Office details <Arrow className="ui-arrow" />
         </Link>
       </Reveal>
 

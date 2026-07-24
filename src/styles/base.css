@@ -180,21 +180,28 @@ p {
   align-items: center;
 }
 
-/* Stable CTA geometry adapted from the compact button systems in the supplied
-   references: a max-content label plus a dedicated arrow control. */
+/* Action buttons. Pill variants keep a single circular arrow. On hover it
+   glides from the left edge to the right edge and stops there; the label slides
+   across to clear its landing spot and the current text is replaced by an
+   identical copy. The surface also changes colour. In-copy actions use the line
+   variant — an underlined link sharing the same diagonal arrow motion. */
 .action {
   --action-bg: var(--accent);
   --action-fg: #fff;
-  --action-arrow-bg: rgba(255, 255, 255, 0.16);
-  --action-arrow-fg: currentColor;
+  --action-icon-bg: rgba(255, 255, 255, 0.16);
+  --action-icon-fg: currentColor;
+  --action-icon-border: color-mix(in srgb, currentColor 22%, transparent);
+  --icon-size: 38px;
+  --icon-edge: 7px;
+  --label-pad: 24px;
+  --icon-reserve: calc(var(--icon-edge) + var(--icon-size) + 12px);
   position: relative;
   display: inline-flex;
   min-height: 52px;
   align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  padding: 7px 8px 7px 20px;
   overflow: hidden;
+  padding-left: var(--icon-reserve);
+  padding-right: var(--label-pad);
   color: var(--action-fg);
   border: 1px solid transparent;
   border-radius: var(--radius-pill);
@@ -210,93 +217,156 @@ p {
     color 420ms var(--ease-out);
 }
 
-.action > span {
-  position: relative;
-  z-index: 1;
-}
-
 .action:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 4px;
 }
 
-.action__arrow {
+.action__icon {
+  position: absolute;
+  top: 50%;
+  left: var(--icon-edge);
+  z-index: 2;
   display: grid;
-  width: 36px;
-  height: 36px;
-  flex: 0 0 36px;
+  width: var(--icon-size);
+  height: var(--icon-size);
   place-items: center;
-  color: var(--action-arrow-fg);
-  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  color: var(--action-icon-fg);
+  border: 1px solid var(--action-icon-border);
   border-radius: 50%;
-  background: var(--action-arrow-bg);
-  font-size: 0.95rem;
+  background: var(--action-icon-bg);
+  transform: translateY(-50%);
   transition:
+    left 600ms var(--ease-spring),
     color 360ms var(--ease-out),
-    background-color 360ms var(--ease-out),
-    transform 500ms var(--ease-spring);
+    background-color 360ms var(--ease-out);
 }
 
-.action:is(:hover, :focus-visible) .action__arrow {
-  transform: translateX(3px);
+/* The arrow travels to the right edge and stays parked there. */
+.action:is(:hover, :focus-visible) .action__icon {
+  left: calc(100% - var(--icon-edge) - var(--icon-size));
 }
 
+.action__arrow-icon {
+  width: 16px;
+  height: 16px;
+  transition: transform 520ms var(--ease-spring);
+}
+
+.action:is(:hover, :focus-visible) .action__arrow-icon {
+  transform: rotate(45deg);
+}
+
+/* Label slides left to clear the arrow's landing spot; the two stacked copies
+   cross-swap so the text is replaced. */
+.action__label {
+  position: relative;
+  display: grid;
+  overflow: hidden;
+  padding-block: 6px;
+  margin-block: -6px;
+  transition: transform 600ms var(--ease-spring);
+}
+
+.action:is(:hover, :focus-visible) .action__label {
+  transform: translateX(calc(var(--label-pad) - var(--icon-reserve)));
+}
+
+.action__label-text {
+  grid-area: 1 / 1;
+  transition:
+    transform 460ms var(--ease-out),
+    opacity 300ms ease;
+}
+
+.action__label-text--next {
+  opacity: 0;
+  transform: translateX(65%);
+}
+
+.action:is(:hover, :focus-visible) .action__label-text {
+  opacity: 0;
+  transform: translateX(-65%);
+}
+
+.action:is(:hover, :focus-visible) .action__label-text--next {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Variants — each shifts colour on hover in a way that suits its surface. */
 .action--solid:is(:hover, :focus-visible) {
   --action-bg: var(--deep);
-  --action-arrow-bg: #fff;
-  --action-arrow-fg: var(--deep);
+  --action-icon-bg: #fff;
+  --action-icon-fg: var(--deep);
+  --action-icon-border: transparent;
 }
 
 .action--light {
   --action-bg: #fff;
   --action-fg: var(--ink);
-  --action-arrow-bg: var(--ink);
-  --action-arrow-fg: #fff;
+  --action-icon-bg: var(--ink);
+  --action-icon-fg: #fff;
+  --action-icon-border: transparent;
 }
 
 .action--light:is(:hover, :focus-visible) {
-  --action-bg: var(--pale);
-  --action-arrow-bg: var(--deep);
+  --action-bg: var(--accent);
+  --action-fg: #fff;
+  --action-icon-bg: #fff;
+  --action-icon-fg: var(--accent);
 }
 
 .action--glass {
   --action-fg: #fff;
-  --action-arrow-bg: #fff;
-  --action-arrow-fg: var(--ink);
+  --action-icon-bg: #fff;
+  --action-icon-fg: var(--ink);
+  --action-icon-border: transparent;
   border-color: var(--light-line);
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(12px);
 }
 
 .action--glass:is(:hover, :focus-visible) {
+  --action-icon-bg: var(--accent);
+  --action-icon-fg: #fff;
+  border-color: rgba(255, 255, 255, 0.5);
   background: rgba(255, 255, 255, 0.16);
 }
 
 .action--ghost {
+  --action-bg: transparent;
   --action-fg: var(--ink);
-  --action-arrow-bg: var(--deep);
-  --action-arrow-fg: #fff;
+  --action-icon-bg: var(--deep);
+  --action-icon-fg: #fff;
+  --action-icon-border: transparent;
   min-height: 48px;
-  padding: 5px 6px 5px 17px;
   border-color: var(--line);
-  border-radius: var(--radius-pill);
-  background: transparent;
 }
 
 .action--ghost:is(:hover, :focus-visible) {
-  --action-fg: var(--accent);
+  --action-bg: var(--accent);
+  --action-fg: #fff;
+  --action-icon-bg: #fff;
+  --action-icon-fg: var(--accent);
   border-color: var(--accent);
 }
 
 .action--line {
   min-height: 40px;
-  padding: 6px 0;
+  align-items: center;
   gap: 10px;
+  padding: 6px 0;
   overflow: visible;
   color: inherit;
   border: 0;
   border-radius: 0;
   background: none;
+}
+
+.action--line .action__label-line {
+  position: relative;
+  z-index: 1;
 }
 
 .action--line::after {
@@ -318,14 +388,15 @@ p {
   transform: scaleX(1);
 }
 
-.action--line .action__arrow {
-  width: auto;
-  height: auto;
-  flex-basis: auto;
-  border: 0;
-  border-radius: 0;
-  background: none;
-  font-size: 0.95rem;
+.action__arrow-line {
+  width: 1.05em;
+  height: 1.05em;
+  flex: none;
+  transition: transform 460ms var(--ease-spring);
+}
+
+.action--line:is(:hover, :focus-visible) .action__arrow-line {
+  transform: rotate(45deg);
 }
 
 .action:disabled {
@@ -391,16 +462,11 @@ p {
   }
 
   .action {
+    --icon-size: 34px;
+    --label-pad: 20px;
     min-height: 46px;
     width: fit-content;
     max-width: 100%;
-    padding: 5px 6px 5px 17px;
     text-align: left;
-  }
-
-  .action__arrow {
-    width: 34px;
-    height: 34px;
-    flex-basis: 34px;
   }
 }

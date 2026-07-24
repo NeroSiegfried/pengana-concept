@@ -17,6 +17,11 @@
     var(--plate-radius) var(--plate-radius) var(--plate-radius) 4px;
   --radius-pill: 999px;
   --chamfer: clamp(34px, 4vw, 56px);
+  /* Editorial image cards follow the site's shape language: one deliberately
+     exaggerated radius, and the other three corners left perfectly sharp — never
+     a plain rounded rectangle. */
+  --img-corner: clamp(34px, 4vw, 54px);
+  --img-corners: var(--img-corner) 0 0 0;
 
   --paper: #f4f1e9;
   --paper-bright: #fbfaf7;

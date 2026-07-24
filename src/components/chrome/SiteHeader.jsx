@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { BUSINESSES } from "../../content/businesses.js";
 import { BUSINESS_NAVIGATION, siteFromPath } from "../../content/company.js";
+import { Arrow, Caret } from "../ui/icons.jsx";
 import Wordmark from "../ui/Wordmark.jsx";
 
 const OVERLAY_ROUTES = new Set([
@@ -184,7 +185,7 @@ export default function SiteHeader() {
               onKeyDown={handleMegaTriggerKeyDown}
             >
               Businesses
-              <span className="desktop-nav__caret" aria-hidden="true">⌄</span>
+              <Caret className="desktop-nav__caret" />
             </button>
             <NavLink
               ref={desktopContactRef}
@@ -229,7 +230,7 @@ export default function SiteHeader() {
               </p>
             </div>
             <Link to="/companies" className="mega__all">
-              View the portfolio <span aria-hidden="true">↗</span>
+              View the portfolio <Arrow className="ui-arrow" />
             </Link>
           </div>
           <div className="mega__cols">
@@ -298,7 +299,7 @@ export default function SiteHeader() {
               >
                 <NavLink to={business.route} className="mobile-menu__biz-name">
                   <span>{business.name}</span>
-                  <span aria-hidden="true">↗</span>
+                  <Arrow className="ui-arrow" />
                 </NavLink>
                 {BUSINESS_NAVIGATION[business.id] ? (
                   <div className="mobile-menu__sub">

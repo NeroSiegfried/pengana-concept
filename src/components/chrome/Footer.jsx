@@ -6,6 +6,7 @@ import {
   siteFromPath,
   telephoneHref,
 } from "../../content/company.js";
+import { Arrow } from "../ui/icons.jsx";
 import Wordmark from "../ui/Wordmark.jsx";
 
 export default function Footer() {
@@ -19,7 +20,7 @@ export default function Footer() {
           <Wordmark inverted />
           <p>{GROUP.descriptor}</p>
           <Link className="site-footer__cta" to="/contact">
-            Start a conversation <span aria-hidden="true">↗</span>
+            Start a conversation <Arrow className="ui-arrow" />
           </Link>
         </div>
 

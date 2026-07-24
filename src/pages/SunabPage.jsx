@@ -6,6 +6,7 @@ import {
 } from "../components/blocks/EditorialBlocks.jsx";
 import ContactForm from "../components/blocks/ContactForm.jsx";
 import PageFrame from "../components/chrome/PageFrame.jsx";
+import { Arrow } from "../components/ui/icons.jsx";
 import OfficeMap from "../components/ui/OfficeMap.jsx";
 import Reveal from "../components/ui/Reveal.jsx";
 import { BUSINESSES } from "../content/businesses.js";
@@ -82,14 +83,6 @@ export default function SunabPage() {
             alt="Network engineer inspecting carrier infrastructure"
             loading="lazy"
           />
-          <span>Network operations · Abuja</span>
-        </Reveal>
-        <Reveal className="sunab-network-story__detail">
-          <img
-            src={IMAGES.sunab.statement}
-            alt="Telecommunications network detail"
-            loading="lazy"
-          />
         </Reveal>
       </section>
 
@@ -160,7 +153,7 @@ export default function SunabPage() {
                 <p className="eyebrow">Telephone</p>
                 {GROUP.phones.map((phone) => (
                   <a href={telephoneHref(phone)} key={phone}>
-                    {phone} <span aria-hidden="true">↗</span>
+                    {phone} <Arrow className="ui-arrow" />
                   </a>
                 ))}
               </div>
@@ -218,7 +211,7 @@ export default function SunabPage() {
             sunabtelecomservices.com
           </span>
           <span className="sunab-handoff__arrow" aria-hidden="true">
-            ↗
+            <Arrow className="ui-arrow" />
           </span>
         </a>
       </Reveal>

@@ -1,3 +1,32 @@
+/* Icons ------------------------------------------------------------------- */
+
+.icon {
+  display: block;
+  flex: none;
+}
+
+/* Standalone diagonal arrow used in links, list rows and image captions. It
+   points to the upper-right at rest and swivels to point straight right when its
+   row is hovered or focused — the shared grammar for every non-button arrow. */
+.ui-arrow {
+  width: 1.05em;
+  height: 1.05em;
+  transition: transform 420ms var(--ease-spring);
+}
+
+:where(
+  .mega__all,
+  .mobile-menu__biz-name,
+  .site-footer__cta,
+  .contact-details__phones a,
+  .location-rail > a,
+  .structure-list__item,
+  .sunab-handoff__link,
+  .acc-card
+):is(:hover, :focus-visible) .ui-arrow {
+  transform: rotate(45deg);
+}
+
 /* Chrome ------------------------------------------------------------------ */
 
 .chrome {
@@ -200,8 +229,9 @@
 }
 
 .desktop-nav__caret {
-  font-size: 0.7rem;
-  transition: transform 300ms var(--ease-out);
+  width: 0.95rem;
+  height: 0.95rem;
+  transition: transform 320ms var(--ease-out);
 }
 
 .desktop-nav__trigger.is-open .desktop-nav__caret {
@@ -276,11 +306,11 @@
   gap: 8px;
   font-size: 0.78rem;
   font-weight: 600;
-  transition: gap 260ms var(--ease-out);
 }
 
-.mega__all:hover {
-  gap: 14px;
+.mega__all .ui-arrow {
+  width: 0.95rem;
+  height: 0.95rem;
 }
 
 .mega__cols {
@@ -516,6 +546,22 @@
   text-transform: uppercase;
 }
 
+.scroll-cue__caret {
+  width: 1.05rem;
+  height: 1.05rem;
+  animation: scroll-bob 2.4s var(--ease-out) infinite;
+}
+
+@keyframes scroll-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
 .business-hero {
   min-height: min(900px, 92svh);
 }
@@ -704,7 +750,8 @@
   min-width: 0;
   overflow: hidden;
   color: white;
-  border-radius: var(--radius-m);
+  border-radius: var(--img-corners);
+  clip-path: inset(0 round var(--img-corners));
   background: var(--deep);
   isolation: isolate;
   transition:
@@ -812,17 +859,20 @@
   place-items: center;
   border: 1px solid var(--light-line);
   border-radius: 50%;
-  font-size: 1.1rem;
   transition:
     color 200ms ease,
     background-color 200ms ease,
     transform 500ms var(--ease-spring);
 }
 
+.acc-card__arrow .ui-arrow {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
 .acc-card:is(:hover, :focus-visible) .acc-card__arrow {
   color: var(--ink);
   background: white;
-  transform: translate(3px, -3px);
 }
 
 .image-statement {
@@ -909,10 +959,11 @@
   background: var(--accent);
 }
 
-.location-rail > a span {
-  color: white;
-  font-size: 1.4rem;
-  text-align: right;
+.location-rail > a .ui-arrow {
+  width: 1.5rem;
+  height: 1.5rem;
+  align-self: flex-end;
+  margin-top: auto;
 }
 
 .numbered-grid {
@@ -1036,6 +1087,22 @@
 
 .structure-list__item > span:last-child {
   font-size: 2rem;
+}
+
+.structure-list__arrow {
+  align-self: start;
+  transition: transform 460ms var(--ease-spring);
+}
+
+.structure-list__arrow .ui-arrow {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+/* The wrapper travels up-and-right while the icon swivels to point right — the
+   combined motion adapted from the reference sites. */
+.structure-list__item:is(:hover, :focus-visible) .structure-list__arrow {
+  transform: translate(5px, -5px);
 }
 
 .structure-list__item small {
@@ -1214,7 +1281,8 @@
   position: relative;
   overflow: hidden;
   aspect-ratio: 5 / 6;
-  border-radius: var(--radius-m);
+  border-radius: var(--img-corners);
+  clip-path: inset(0 round var(--img-corners));
   background: var(--deep);
 }
 
@@ -1253,6 +1321,16 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 380ms ease,
+    transform 520ms var(--ease-out);
+}
+
+.split-story__media:hover .split-story__caption {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .split-story__body {
@@ -1333,7 +1411,10 @@
   position: relative;
   overflow: hidden;
   min-height: 0;
-  border-radius: var(--radius-s);
+  border-radius: var(--img-corners);
+  /* clip-path keeps the exaggerated corner clipped even while the inner image
+     is mid-transform, which plain overflow + radius drops during the zoom. */
+  clip-path: inset(0 round var(--img-corners));
   background: var(--deep);
 }
 
@@ -1349,51 +1430,54 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scale(1.035);
   transition:
     filter 650ms ease,
     transform 900ms var(--ease-out);
 }
 
-.company-index__gallery:is(:hover, :focus-visible) .company-index__image img {
-  filter: saturate(1.04);
-  transform: scale(1.005);
+/* Only the tile actually under the pointer lifts — not the whole gallery. */
+.company-index__image:hover img {
+  filter: saturate(1.05);
+  transform: scale(1.05);
 }
 
+/* Highlight uses the same translucent pill as the rest of the site, and only
+   appears on the tile being hovered rather than sitting permanently on. */
 .company-index__caption {
   position: absolute;
-  right: 12px;
   bottom: 12px;
   left: 12px;
   display: flex;
   width: max-content;
   max-width: calc(100% - 24px);
   align-items: center;
-  gap: 18px;
-  padding: 11px 14px;
-  color: var(--ink);
-  border-radius: var(--plate-corners);
-  background: var(--paper-bright);
-  font-size: 0.68rem;
+  gap: 12px;
+  padding: 8px 15px;
+  color: #fff;
+  border-radius: var(--radius-pill);
+  background: rgba(12, 16, 20, 0.5);
+  backdrop-filter: blur(10px);
+  font-size: 0.63rem;
   font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(8px);
   transition:
-    opacity 420ms ease,
-    transform 620ms var(--ease-out);
+    opacity 380ms ease,
+    transform 520ms var(--ease-out);
 }
 
 .company-index__caption span:first-child {
-  color: var(--accent);
+  color: color-mix(in srgb, var(--accent) 45%, white);
   letter-spacing: 0.12em;
 }
 
 .company-index__caption span:last-child {
   letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
-.company-index__gallery:is(:hover, :focus-visible) .company-index__caption {
+.company-index__image:hover .company-index__caption {
   opacity: 1;
   transform: translateY(0);
 }
@@ -1534,8 +1618,9 @@
 .service-section__head,
 .produce-section__head {
   display: flex;
-  align-items: end;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
   margin-bottom: clamp(48px, 7vw, 96px);
 }
 
@@ -1608,7 +1693,8 @@
   position: relative;
   overflow: hidden;
   aspect-ratio: 4 / 5;
-  border-radius: var(--radius-m);
+  border-radius: var(--img-corners);
+  clip-path: inset(0 round var(--img-corners));
   background: var(--deep);
 }
 
@@ -1923,7 +2009,7 @@
 }
 
 .sunab-capabilities {
-  padding: 0 var(--gutter) var(--section-space);
+  padding: var(--section-space) var(--gutter);
   background: var(--paper-bright);
 }
 
@@ -1968,16 +2054,15 @@
 
 .sunab-network-story {
   display: grid;
-  grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.15fr) minmax(220px, 0.55fr);
-  grid-template-rows: auto minmax(240px, 0.65fr);
-  gap: clamp(12px, 2vw, 28px);
+  grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(24px, 4vw, 72px);
+  align-items: center;
   padding: var(--section-space) var(--gutter);
   color: white;
   background: var(--deep);
 }
 
 .sunab-network-story__copy {
-  align-self: end;
   padding-right: clamp(12px, 3vw, 44px);
 }
 
@@ -1994,16 +2079,10 @@
 
 .sunab-network-story__lead {
   position: relative;
-  grid-column: 2 / 4;
-  grid-row: 1 / 3;
   overflow: hidden;
-  min-height: 680px;
-}
-
-.sunab-network-story__detail {
-  position: relative;
-  overflow: hidden;
-  min-height: 240px;
+  min-height: clamp(440px, 46vw, 660px);
+  border-radius: var(--img-corners);
+  clip-path: inset(0 round var(--img-corners));
 }
 
 .sunab-network-story img {
@@ -2013,24 +2092,8 @@
   transition: transform 1.2s var(--ease-out);
 }
 
-.sunab-network-story__lead:hover img,
-.sunab-network-story__detail:hover img {
+.sunab-network-story__lead:hover img {
   transform: scale(1.04);
-}
-
-.sunab-network-story__lead span {
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
-  padding: 8px 12px;
-  color: white;
-  border-radius: var(--radius-pill);
-  background: rgba(5, 9, 28, 0.6);
-  backdrop-filter: blur(8px);
-  font-size: 0.64rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .sunab-handoff {
@@ -2056,19 +2119,27 @@
   justify-content: space-between;
   padding: clamp(64px, 9vw, 140px) var(--gutter);
   color: white;
-  background: linear-gradient(150deg, #0b1230 0%, #141d6b 55%, #24319c 100%);
+  background: var(--sunab-deep);
 }
 
+/* Solid brand navy with one soft accent glow — the same restrained treatment
+   the page's other dark bands use, in place of the old multi-stop gradient. */
 .sunab-handoff__link::after {
   position: absolute;
   inset: 0;
   background: radial-gradient(
-    120% 80% at 88% 8%,
-    rgba(122, 142, 255, 0.28),
-    transparent 60%
+    130% 100% at 92% 0%,
+    color-mix(in srgb, var(--sunab-accent) 42%, transparent),
+    transparent 58%
   );
   content: "";
   pointer-events: none;
+  opacity: 0.85;
+  transition: opacity 500ms var(--ease-out);
+}
+
+.sunab-handoff__link:hover::after {
+  opacity: 1;
 }
 
 .sunab-handoff__kicker {
@@ -2104,8 +2175,12 @@
 .sunab-handoff__arrow {
   position: relative;
   align-self: flex-end;
-  font-size: 2rem;
   transition: transform 420ms var(--ease-spring);
+}
+
+.sunab-handoff__arrow .ui-arrow {
+  width: 2rem;
+  height: 2rem;
 }
 
 .sunab-handoff__link:hover .sunab-handoff__arrow {
@@ -2298,18 +2373,15 @@
     color 260ms ease;
 }
 
-.contact-details__phones a span {
+.contact-details__phones a .ui-arrow {
+  width: 0.95rem;
+  height: 0.95rem;
   color: var(--accent);
-  transition: transform 400ms var(--ease-out);
 }
 
 .contact-details__phones a:is(:hover, :focus-visible) {
   color: var(--accent);
   border-color: var(--accent);
-}
-
-.contact-details__phones a:is(:hover, :focus-visible) span {
-  transform: translate(2px, -2px);
 }
 
 .contact-details__route .action {
@@ -2448,6 +2520,8 @@
 
 .contact-composer__media {
   height: clamp(480px, 54vw, 780px);
+  border-radius: var(--img-corners);
+  clip-path: inset(0 round var(--img-corners));
 }
 
 .contact-composer__media img {
@@ -2466,14 +2540,25 @@
   position: absolute;
   bottom: 14px;
   left: 14px;
-  padding: 11px 15px;
-  color: var(--ink);
-  border-radius: var(--plate-corners);
-  background: var(--paper-bright);
-  font-size: 0.66rem;
+  padding: 8px 15px;
+  color: #fff;
+  border-radius: var(--radius-pill);
+  background: rgba(12, 16, 20, 0.5);
+  backdrop-filter: blur(10px);
+  font-size: 0.63rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 380ms ease,
+    transform 520ms var(--ease-out);
+}
+
+.contact-composer__media:hover figcaption {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .contact-composer__map {
@@ -2606,15 +2691,18 @@
   font-size: 0.8rem;
   font-weight: 600;
   transition:
-    gap 320ms var(--ease-out),
     background-color 240ms ease,
     border-color 240ms ease;
 }
 
 .site-footer__cta:hover {
-  gap: 20px;
   border-color: rgba(255, 255, 255, 0.55);
   background: rgba(255, 255, 255, 0.08);
+}
+
+.site-footer__cta .ui-arrow {
+  width: 0.95rem;
+  height: 0.95rem;
 }
 
 .site-footer__nav {
@@ -2885,6 +2973,11 @@
     color: var(--accent);
   }
 
+  .mobile-menu__biz-name .ui-arrow {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
   .mobile-menu__sub {
     display: flex;
     flex-wrap: wrap;
@@ -3034,23 +3127,16 @@
   }
 
   .sunab-network-story {
-    grid-template-columns: 0.7fr 1.3fr;
-    grid-template-rows: auto minmax(420px, 62vw);
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
 
   .sunab-network-story__copy {
-    grid-column: 1 / -1;
+    padding-right: 0;
   }
 
   .sunab-network-story__lead {
-    grid-column: 2;
-    grid-row: 2;
-    min-height: 0;
-  }
-
-  .sunab-network-story__detail {
-    grid-column: 1;
-    grid-row: 2;
+    min-height: clamp(400px, 58vw, 560px);
   }
 
   .staple-index {
@@ -3170,7 +3256,7 @@
   .showcase {
     min-height: auto;
     flex-direction: column;
-    gap: 48px;
+    gap: var(--gutter);
     padding-bottom: 12px;
   }
 
@@ -3181,50 +3267,59 @@
 
   .acc-card {
     --card-panel: var(--group-deep);
-    min-height: clamp(500px, 132vw, 590px);
+    min-height: clamp(520px, 128vw, 600px);
     flex: none;
-    overflow: visible;
-    border-radius: var(--radius-m);
+    overflow: hidden;
+    border-radius: var(--img-corners);
     background: var(--card-panel);
   }
 
   .acc-card--properties {
     --card-panel: var(--properties-deep);
+    --accent: var(--properties-accent);
   }
 
   .acc-card--tishino {
     --card-panel: var(--tishino-deep);
+    --accent: var(--tishino-accent);
   }
 
   .acc-card--sunab {
     --card-panel: var(--sunab-deep);
+    --accent: var(--sunab-accent);
   }
 
-  .acc-card img,
-  .acc-card__veil {
-    border-radius: var(--radius-m);
-    clip-path: inset(0 round var(--radius-m));
-  }
-
+  /* Body becomes a paper cutout: the section background flush in the card's
+     bottom-left, with the corner nearest the image centre carved out so it
+     reads as a piece cut from the photo. The image keeps its exaggerated
+     corners on the other three corners, never the lower-left. */
   .acc-card__body {
-    right: clamp(34px, 11vw, 54px);
-    bottom: -24px;
-    left: 12px;
-    min-height: 172px;
-    padding: 24px 22px;
-    border: 1px solid color-mix(in srgb, white 12%, transparent);
-    border-radius: var(--plate-corners);
-    background: var(--card-panel);
-    box-shadow: 0 20px 48px -34px rgba(0, 0, 0, 0.72);
+    right: auto;
+    bottom: 0;
+    left: 0;
+    min-height: 0;
+    max-width: min(86%, 440px);
+    padding: 22px 34px 24px 22px;
+    color: var(--ink);
+    border: 0;
+    border-radius: 0 var(--img-corner) 0 0;
+    background: var(--paper-bright);
+    box-shadow: none;
+  }
+
+  .acc-card__eyebrow {
+    color: var(--accent);
   }
 
   .acc-card__name {
-    font-size: clamp(2.4rem, 11vw, 3.6rem);
+    color: var(--ink);
+    font-size: clamp(2rem, 9vw, 2.9rem);
   }
 
   /* On phones there's no hover, so always show the summary. */
   .acc-card__sub {
-    max-height: 160px;
+    max-height: 200px;
+    color: var(--muted);
     opacity: 1;
     transform: none;
   }
@@ -3232,6 +3327,7 @@
   .acc-card__arrow {
     top: 20px;
     right: 18px;
+    color: #fff;
     background: color-mix(in srgb, var(--card-panel) 72%, transparent);
     backdrop-filter: blur(8px);
   }
@@ -3370,24 +3466,15 @@
 
   .sunab-network-story {
     grid-template-columns: 1fr;
-    grid-template-rows: auto 62svh 280px;
-    gap: 8px;
-    padding-inline: 0;
+    gap: 24px;
   }
 
   .sunab-network-story__copy {
-    grid-column: 1;
-    padding: 0 var(--gutter) 32px;
+    padding: 0 0 8px;
   }
 
   .sunab-network-story__lead {
-    grid-column: 1;
-    grid-row: 2;
-  }
-
-  .sunab-network-story__detail {
-    grid-column: 1;
-    grid-row: 3;
+    min-height: 62svh;
   }
 
   .staple-index__list {
@@ -3438,7 +3525,6 @@
   .company-index__image--tile,
   .company-index__image--panorama {
     aspect-ratio: 4 / 3;
-    border-radius: var(--radius-s);
   }
 
   .company-index__image img {
@@ -3454,9 +3540,16 @@
     transform: none;
   }
 
+  /* Touch has no hover, so image highlights stay visible instead of vanishing. */
+  .split-story__caption,
+  .contact-composer__media figcaption {
+    opacity: 1;
+    transform: none;
+  }
+
   .focus-pair {
     gap: 8px;
-    padding-inline: 0;
+    padding-inline: var(--gutter);
   }
 
   .focus-card {
@@ -3551,4 +3644,74 @@
   .type-hero h1 {
     font-size: clamp(3.2rem, 16.2vw, 5rem);
   }
+}
+
+/* Editorial image corners -------------------------------------------------- */
+
+/* Two treatments — an exaggerated radius or an angled chamfer — each on a single
+   corner with the other three sharp. Collections mix both the treatment and the
+   position so an image grid never reads as a cookie-cutter row. Kept at the end
+   of the file so a chamfer's clip-path overrides an image card's default corner.
+   Radius variants only re-point the shared --img-corners token. */
+.img-cut--tl {
+  --img-corners: var(--img-corner) 0 0 0;
+}
+
+.img-cut--tr {
+  --img-corners: 0 var(--img-corner) 0 0;
+}
+
+.img-cut--br {
+  --img-corners: 0 0 var(--img-corner) 0;
+}
+
+.img-cut--bl {
+  --img-corners: 0 0 0 var(--img-corner);
+}
+
+.img-chamfer--tl,
+.img-chamfer--tr,
+.img-chamfer--br,
+.img-chamfer--bl {
+  border-radius: 0;
+}
+
+.img-chamfer--tl {
+  clip-path: polygon(
+    var(--img-corner) 0,
+    100% 0,
+    100% 100%,
+    0 100%,
+    0 var(--img-corner)
+  );
+}
+
+.img-chamfer--tr {
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--img-corner)) 0,
+    100% var(--img-corner),
+    100% 100%,
+    0 100%
+  );
+}
+
+.img-chamfer--br {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--img-corner)),
+    calc(100% - var(--img-corner)) 100%,
+    0 100%
+  );
+}
+
+.img-chamfer--bl {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    var(--img-corner) 100%,
+    0 calc(100% - var(--img-corner))
+  );
 }

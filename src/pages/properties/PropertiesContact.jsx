@@ -4,6 +4,7 @@ import {
 } from "../../components/blocks/EditorialBlocks.jsx";
 import ContactForm from "../../components/blocks/ContactForm.jsx";
 import BusinessPageFrame from "../../components/chrome/BusinessPageFrame.jsx";
+import { Arrow } from "../../components/ui/icons.jsx";
 import OfficeMap from "../../components/ui/OfficeMap.jsx";
 import Reveal from "../../components/ui/Reveal.jsx";
 import { BUSINESSES } from "../../content/businesses.js";
@@ -51,7 +52,7 @@ export default function PropertiesContact() {
                 <p className="eyebrow">Telephone</p>
                 {GROUP.phones.map((phone) => (
                   <a href={telephoneHref(phone)} key={phone}>
-                    {phone} <span aria-hidden="true">↗</span>
+                    {phone} <Arrow className="ui-arrow" />
                   </a>
                 ))}
               </div>

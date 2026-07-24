@@ -14,6 +14,9 @@ const PRODUCE_IMAGES = [
   IMAGES.tishino.beans,
   IMAGES.tishino.produce,
 ];
+// Mixed treatment and position so the trio doesn't read as a uniform row.
+// Top-left is left alone — it carries the index number.
+const PRODUCE_CORNERS = ["img-cut--tr", "img-chamfer--bl", "img-cut--br"];
 
 export default function ProducePage() {
   return (
@@ -35,7 +38,7 @@ export default function ProducePage() {
         <div className="produce-trio">
           {TISHINO.produce.map((category, index) => (
             <Reveal className="produce-trio__item" delay={(index % 3) + 1} key={category.title}>
-              <div className="produce-trio__media">
+              <div className={`produce-trio__media ${PRODUCE_CORNERS[index]}`}>
                 <img src={PRODUCE_IMAGES[index]} alt="" loading="lazy" />
                 <span className="produce-trio__num">
                   {String(index + 1).padStart(2, "0")}
