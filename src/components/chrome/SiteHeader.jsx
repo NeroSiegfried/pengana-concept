@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { BUSINESSES } from "../../content/businesses.js";
-import {
-  BUSINESS_NAVIGATION,
-  siteFromPath,
-} from "../../content/company.js";
+import { BUSINESS_NAVIGATION, siteFromPath } from "../../content/company.js";
 import Wordmark from "../ui/Wordmark.jsx";
 
 const OVERLAY_ROUTES = new Set([
@@ -15,9 +12,6 @@ const OVERLAY_ROUTES = new Set([
   "/sunab",
 ]);
 
-const MENU_BUSINESSES = [BUSINESSES.properties, BUSINESSES.tishino];
-
-// Businesses that carry an in-header context row (they have sub-pages).
 const CONTEXT_SITES = new Set(["properties", "tishino"]);
 
 export default function SiteHeader() {
@@ -26,14 +20,14 @@ export default function SiteHeader() {
   const [megaOpen, setMegaOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const menuButtonRef = useRef(null);
-  const closeTimer = useRef(null);
+  const businessMenuRef = useRef(null);
 
   const site = siteFromPath(pathname);
   const hasContext = CONTEXT_SITES.has(site);
-  const overlay = OVERLAY_ROUTES.has(pathname) && !scrolled && !megaOpen;
+  const overlay = OVERLAY_ROUTES.has(pathname) && !scrolled && !megaOpen && !menuOpen;
 
   useEffect(() => {
-    const update = () => setScrolled(window.scrollY > 24);
+    const update = () => setScrolled(window.scrollY > 18);
     update();
     window.addEventListener("scroll", update, { passive: true });
     return () => window.removeEventListener("scroll", update);
@@ -50,35 +44,37 @@ export default function SiteHeader() {
   }, [menuOpen]);
 
   useEffect(() => {
-    if (!menuOpen && !megaOpen) return undefined;
-    function onKey(event) {
-      if (event.key === "Escape") {
-        setMenuOpen(false);
+    function closeOnOutsideClick(event) {
+      if (megaOpen && !businessMenuRef.current?.contains(event.target)) {
         setMegaOpen(false);
-        menuButtonRef.current?.focus();
       }
     }
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [menuOpen, megaOpen]);
-
-  const openMega = () => {
-    clearTimeout(closeTimer.current);
-    setMegaOpen(true);
-  };
-  const closeMegaSoon = () => {
-    closeTimer.current = setTimeout(() => setMegaOpen(false), 150);
-  };
+    function closeOnEscape(event) {
+      if (event.key !== "Escape") return;
+      setMenuOpen(false);
+      setMegaOpen(false);
+      menuButtonRef.current?.focus();
+    }
+    document.addEventListener("pointerdown", closeOnOutsideClick);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("pointerdown", closeOnOutsideClick);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [megaOpen]);
 
   return (
-    <div className={`chrome ${hasContext ? "chrome--context" : ""}`}>
+    <div
+      className={`chrome ${hasContext ? "chrome--context" : ""}`}
+      data-site={site}
+      ref={businessMenuRef}
+    >
       <header
         className={`site-header ${overlay ? "site-header--overlay" : ""} ${
           scrolled ? "site-header--scrolled" : ""
         } ${megaOpen ? "site-header--mega" : ""} ${
           hasContext ? "site-header--context" : ""
         }`}
-        data-site={site}
       >
         <div className="site-header__bar">
           <Wordmark inverted={overlay} />
@@ -87,36 +83,22 @@ export default function SiteHeader() {
             <NavLink to="/about" className="desktop-nav__link">
               About
             </NavLink>
-
-            <div
-              className="desktop-nav__dropdown"
-              onMouseEnter={openMega}
-              onMouseLeave={closeMegaSoon}
+            <button
+              type="button"
+              className={`desktop-nav__link desktop-nav__trigger ${
+                megaOpen ? "is-open" : ""
+              }`}
+              aria-expanded={megaOpen}
+              aria-controls="businesses-mega"
+              onClick={() => setMegaOpen((value) => !value)}
             >
-              <button
-                type="button"
-                className={`desktop-nav__link desktop-nav__trigger ${
-                  megaOpen ? "is-open" : ""
-                }`}
-                aria-expanded={megaOpen}
-                aria-controls="businesses-mega"
-                onClick={() => setMegaOpen((value) => !value)}
-              >
-                Businesses
-                <span className="desktop-nav__caret" aria-hidden="true">
-                  ⌄
-                </span>
-              </button>
-            </div>
-
+              Businesses
+              <span className="desktop-nav__caret" aria-hidden="true">⌄</span>
+            </button>
             <NavLink to="/contact" className="desktop-nav__link">
               Contact
             </NavLink>
           </nav>
-
-          <Link to="/contact" className="header-enquire">
-            Enquire <span aria-hidden="true">↗</span>
-          </Link>
 
           <button
             ref={menuButtonRef}
@@ -124,6 +106,7 @@ export default function SiteHeader() {
             className={`menu-toggle ${menuOpen ? "menu-toggle--open" : ""}`}
             aria-label={menuOpen ? "Close navigation" : "Open navigation"}
             aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
             onClick={() => setMenuOpen((value) => !value)}
           >
             <span />
@@ -134,64 +117,59 @@ export default function SiteHeader() {
         {hasContext ? <ContextRow site={site} /> : null}
       </header>
 
-      {/* Businesses mega-panel — sibling of <header> so the header's frost
-          never becomes its containing block. */}
       <div
         id="businesses-mega"
         className={`mega ${megaOpen ? "mega--open" : ""}`}
         aria-hidden={!megaOpen}
         inert={megaOpen ? undefined : ""}
-        onMouseEnter={openMega}
-        onMouseLeave={closeMegaSoon}
+        onMouseLeave={() => setMegaOpen(false)}
       >
         <div className="mega__inner">
           <div className="mega__head">
-            <p className="mega__label">Our businesses</p>
+            <div>
+              <p className="mega__label">Across the group</p>
+              <p className="mega__intro">
+                Three operating businesses. Each has its own work, place and voice.
+              </p>
+            </div>
             <Link to="/companies" className="mega__all">
-              All businesses <span aria-hidden="true">↗</span>
+              View the portfolio <span aria-hidden="true">↗</span>
             </Link>
           </div>
           <div className="mega__cols">
-            {MENU_BUSINESSES.map((business, index) => (
-              <div className="mega__col" data-business={business.id} key={business.id}>
+            {Object.values(BUSINESSES).map((business, index) => (
+              <div
+                className="mega__col"
+                data-business={business.id}
+                key={business.id}
+              >
                 <Link className="mega__biz" to={business.route}>
                   <span className="mega__num">0{index + 1}</span>
                   <strong>{business.name}</strong>
                   <small>{business.eyebrow}</small>
                 </Link>
                 <div className="mega__links">
-                  {BUSINESS_NAVIGATION[business.id].map((sub) => (
+                  {BUSINESS_NAVIGATION[business.id]?.map((sub) => (
                     <Link to={sub.to} key={sub.to}>
                       {sub.label}
                     </Link>
-                  ))}
+                  )) || (
+                    <>
+                      <Link to="/sunab">Company overview</Link>
+                      <Link to="/contact?business=Sunab%20Telecoms%20Services&topic=Carrier%20services">
+                        Carrier enquiry
+                      </Link>
+                    </>
+                  )}
                 </div>
               </div>
             ))}
-
-            <div className="mega__col" data-business="sunab">
-              <Link className="mega__biz" to="/sunab">
-                <span className="mega__num">03</span>
-                <strong>{BUSINESSES.sunab.name}</strong>
-                <small>{BUSINESSES.sunab.eyebrow}</small>
-              </Link>
-              <div className="mega__links">
-                <Link to="/sunab">Carrier services</Link>
-                <a
-                  href={BUSINESSES.sunab.externalUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Visit Sunab site <span aria-hidden="true">↗</span>
-                </a>
-              </div>
-            </div>
           </div>
         </div>
       </div>
 
-      {/* Full-screen menu (mobile) — also a sibling of <header>. */}
       <div
+        id="mobile-navigation"
         className={`mobile-menu ${menuOpen ? "mobile-menu--open" : ""}`}
         aria-hidden={!menuOpen}
         inert={menuOpen ? undefined : ""}
@@ -200,7 +178,8 @@ export default function SiteHeader() {
         aria-label="Site navigation"
       >
         <div className="mobile-menu__top">
-          <Wordmark inverted onClick={() => setMenuOpen(false)} />
+          <Wordmark onClick={() => setMenuOpen(false)} />
+          <span>Menu</span>
         </div>
         <nav className="mobile-menu__nav" aria-label="Mobile navigation">
           <NavLink to="/" className="mobile-menu__link" end>
@@ -209,39 +188,39 @@ export default function SiteHeader() {
           <NavLink to="/about" className="mobile-menu__link">
             <span>02</span> About
           </NavLink>
+          <NavLink to="/companies" className="mobile-menu__link">
+            <span>03</span> Businesses
+          </NavLink>
           <NavLink to="/contact" className="mobile-menu__link">
-            <span>03</span> Contact
+            <span>04</span> Contact
           </NavLink>
 
           <div className="mobile-menu__businesses">
-            {MENU_BUSINESSES.map((business) => (
-              <div className="mobile-menu__biz" key={business.id} data-business={business.id}>
+            {Object.values(BUSINESSES).map((business) => (
+              <div
+                className="mobile-menu__biz"
+                key={business.id}
+                data-business={business.id}
+              >
                 <NavLink to={business.route} className="mobile-menu__biz-name">
-                  {business.name} <span aria-hidden="true">↗</span>
+                  <span>{business.name}</span>
+                  <span aria-hidden="true">↗</span>
                 </NavLink>
-                <div className="mobile-menu__sub">
-                  {BUSINESS_NAVIGATION[business.id].map((sub) => (
-                    <NavLink to={sub.to} key={sub.to} end={sub.to === business.route}>
-                      {sub.label}
-                    </NavLink>
-                  ))}
-                </div>
+                {BUSINESS_NAVIGATION[business.id] ? (
+                  <div className="mobile-menu__sub">
+                    {BUSINESS_NAVIGATION[business.id].map((sub) => (
+                      <NavLink
+                        to={sub.to}
+                        key={sub.to}
+                        end={sub.to === business.route}
+                      >
+                        {sub.label}
+                      </NavLink>
+                    ))}
+                  </div>
+                ) : null}
               </div>
             ))}
-            <div className="mobile-menu__biz" data-business="sunab">
-              <NavLink to="/sunab" className="mobile-menu__biz-name">
-                {BUSINESSES.sunab.name} <span aria-hidden="true">↗</span>
-              </NavLink>
-              <div className="mobile-menu__sub">
-                <a
-                  href={BUSINESSES.sunab.externalUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Visit Sunab site ↗
-                </a>
-              </div>
-            </div>
           </div>
         </nav>
         <p className="mobile-menu__foot">Abuja · Jos · Nigeria</p>
@@ -253,15 +232,12 @@ export default function SiteHeader() {
 function ContextRow({ site }) {
   const business = BUSINESSES[site];
   const items = BUSINESS_NAVIGATION[site];
+
   return (
     <div className="site-header__context">
-      <div className="context__crumb">
-        <Link to="/" className="context__group">
-          Pengana Group
-        </Link>
-        <span className="context__sep" aria-hidden="true">
-          /
-        </span>
+      <div className="context__crumb" aria-label="Breadcrumb">
+        <Link to="/" className="context__group">Pengana</Link>
+        <span className="context__sep" aria-hidden="true">/</span>
         <Link to={business.route} className="context__biz">
           {business.name}
         </Link>

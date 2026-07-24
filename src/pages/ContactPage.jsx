@@ -50,6 +50,23 @@ export default function ContactPage() {
         text="Use the shared telephone lines for Pengana Concept, Pengana Properties and Tishino Ventures, or choose an office below."
       />
 
+      <ContactForm
+        eyebrow="Route your enquiry"
+        title="Start with what you need."
+        intro="Choose the closest subject and the message will carry that context to the right business."
+        defaultBusiness="General enquiry"
+        business="concept"
+        topics={[
+          "Group & corporate",
+          "Property development",
+          "Sales, leasing & management",
+          "Short-let stays",
+          "Agriculture & supply",
+          "Carrier services",
+          "Partnerships",
+        ]}
+      />
+
       <section className="contact-directory">
         <Reveal className="contact-directory__phones">
           <p className="eyebrow">Shared telephone lines</p>
@@ -97,13 +114,6 @@ export default function ContactPage() {
           ))}
         </div>
       </section>
-
-      <ContactForm
-        eyebrow="Send a message"
-        title="Or write to us directly."
-        defaultBusiness="General enquiry"
-        business="concept"
-      />
     </PageFrame>
   );
 }

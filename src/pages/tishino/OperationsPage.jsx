@@ -21,13 +21,13 @@ export default function OperationsPage() {
             A measured next step.
           </>
         }
-        text="Tishino’s supplied business description supports a crop focus today and identifies livestock and poultry as areas for growth."
+        text="Tishino begins with staple cultivation and is looking carefully at the next links in the agricultural value chain."
       />
 
       <IntroSection
         eyebrow="Current focus"
-        title="Cultivation of staple crops."
-        text="Today the work centres on growing staple crops well. Claims about farm size, harvest volumes, processing, storage or distribution are left out until they can be verified — the produce page names the specific crops in focus."
+        title="Cultivation is one part of the journey."
+        text="Good agricultural operations connect crop choice, field practice, timing and route to market. Tishino’s present focus is staple cultivation, with room for the operating model to grow."
         tone="natural"
       />
 
@@ -35,8 +35,8 @@ export default function OperationsPage() {
         image={IMAGES.tishino.operations}
         imageAlt="Farmland and field work"
         eyebrow="Current direction"
-        title="Crops first."
-        text="A focused starting point for a business working in staple agriculture."
+        title="From field decisions to useful supply."
+        text="The strongest crop plan begins with the people it will feed and the market it needs to reach."
         action={{ label: "View the produce focus", to: "/tishino/produce" }}
         position="bottom"
       />

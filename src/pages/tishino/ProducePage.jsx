@@ -9,11 +9,11 @@ import { BUSINESSES } from "../../content/businesses.js";
 import { IMAGES } from "../../content/images.js";
 
 const TISHINO = BUSINESSES.tishino;
-const PRODUCE_IMAGES = {
-  Rice: IMAGES.tishino.rice,
-  Beans: IMAGES.tishino.beans,
-  Maize: IMAGES.tishino.maize,
-};
+const PRODUCE_IMAGES = [
+  IMAGES.tishino.rice,
+  IMAGES.tishino.beans,
+  IMAGES.tishino.produce,
+];
 
 export default function ProducePage() {
   return (
@@ -23,50 +23,63 @@ export default function ProducePage() {
         index="02 / Produce"
         title={
           <>
-            The staples
+            Everyday food.
             <br />
-            we grow.
+            A wider field.
           </>
         }
-        text="Rice, beans and maize are among the everyday crops in focus today — grown for Nigerian homes and markets."
+        text="Tishino’s work belongs to the broader world of Nigerian staples: grains, legumes, roots and tubers that move from farms into everyday meals."
       />
 
       <section className="produce-section produce-section--feature">
         <div className="produce-trio">
-          {TISHINO.produce.map((crop, index) => (
-            <Reveal className="produce-trio__item" delay={(index % 3) + 1} key={crop.title}>
+          {TISHINO.produce.map((category, index) => (
+            <Reveal className="produce-trio__item" delay={(index % 3) + 1} key={category.title}>
               <div className="produce-trio__media">
-                <img src={PRODUCE_IMAGES[crop.title]} alt={`${crop.title} crop`} loading="lazy" />
+                <img src={PRODUCE_IMAGES[index]} alt="" loading="lazy" />
                 <span className="produce-trio__num">
                   {String(index + 1).padStart(2, "0")}
                 </span>
               </div>
-              <h3>{crop.title}</h3>
-              <p>{crop.text}</p>
+              <h3>{category.title}</h3>
+              <p>{category.text}</p>
             </Reveal>
           ))}
         </div>
       </section>
 
-      <Reveal as="section" className="crop-wordmark" aria-label="Rooted in Nigeria">
-        <span>Rooted</span>
-        <span>in</span>
-        <span>Nigeria</span>
-      </Reveal>
-
       <ImageStatement
-        image={IMAGES.tishino.statement}
-        imageAlt="Cultivated fields in green tones"
-        eyebrow="Availability & supply"
-        title="Discuss the current position directly."
-        text="Crop volumes, timing and arrangements are intentionally not published without confirmed operational data."
-        action={{ label: "Contact Tishino Ventures", to: "/tishino/contact" }}
+        image={IMAGES.tishino.staples}
+        imageAlt="A broad selection of Nigerian staples beside cultivated fields"
+        eyebrow="The staple landscape"
+        title="More than a list of three crops."
+        text="Across Nigeria, staples include rice, maize, millet, sorghum, beans, cowpeas, groundnuts, yams and cassava. Talk to Tishino about the part of that landscape relevant to your enquiry."
+        action={{
+          label: "Start a supply enquiry",
+          to: "/tishino/contact?topic=Staple%20crop%20supply",
+        }}
+        position="bottom"
       />
 
+      <Reveal as="section" className="staple-index">
+        <div>
+          <p className="eyebrow">A broader vocabulary</p>
+          <h2>Staples across categories.</h2>
+        </div>
+        <div className="staple-index__list">
+          {TISHINO.staples.map((staple, index) => (
+            <span key={staple}>
+              <small>{String(index + 1).padStart(2, "0")}</small>
+              {staple}
+            </span>
+          ))}
+        </div>
+      </Reveal>
+
       <ContactBand
-        title="Looking to speak about a crop?"
-        text="Start with rice, beans or maize and the Tishino team can take the conversation from there."
-        to="/tishino/contact"
+        title="What are you looking to grow, source or move?"
+        text="Share the crop, volume, location and timing behind your enquiry."
+        to="/tishino/contact?topic=Staple%20crop%20supply"
         label="Agriculture enquiries"
       />
     </BusinessPageFrame>

@@ -20,18 +20,26 @@ export const BUSINESSES = {
       {
         title: "Property development",
         text: "Property development for people and organisations looking to create long-term value in Jos and beyond.",
+        to: "/properties/contact?topic=Property%20development",
+        linkLabel: "Discuss a development",
       },
       {
         title: "Sales",
         text: "Property sales enquiries handled by the local Pengana Properties team.",
+        to: "/properties/contact?topic=Buying%20a%20property",
+        linkLabel: "Make a sales enquiry",
       },
       {
         title: "Leasing & lettings",
         text: "Leasing and lettings for property owners, tenants and prospective occupiers.",
+        to: "/properties/contact?topic=Leasing%20%26%20lettings",
+        linkLabel: "Discuss a letting",
       },
       {
         title: "Property management",
         text: "Ongoing property management as part of the company’s integrated real-estate offering.",
+        to: "/properties/contact?topic=Property%20management",
+        linkLabel: "Talk to the team",
       },
     ],
     stays: {
@@ -46,9 +54,9 @@ export const BUSINESSES = {
     route: "/tishino",
     location: "Abuja, Nigeria",
     summary:
-      "An agriculture business cultivating the staple crops Nigerian households rely on — rice, beans and maize among them — with livestock and poultry identified as areas for growth.",
+      "An agriculture business focused on the staple crops Nigerian households and markets rely on, with livestock and poultry identified as areas for growth.",
     focus:
-      "Tishino works in staple agriculture: the everyday crops that feed Nigerian homes and markets. Rice, beans and maize are among the staples it grows today.",
+      "Tishino works in staple agriculture: the grains, legumes, roots and tubers that feed Nigerian homes and markets. Rice, beans and maize are current examples within a much wider food system.",
     office: {
       label: "Abuja office",
       address: [
@@ -60,17 +68,33 @@ export const BUSINESSES = {
     },
     produce: [
       {
-        title: "Rice",
-        text: "A staple grain grown for households and markets across the region.",
+        title: "Grains",
+        text: "Rice and maize sit within a wider grain landscape that also includes millet and sorghum.",
+        to: "/tishino/contact?topic=Staple%20crop%20supply",
+        linkLabel: "Ask about grain supply",
       },
       {
-        title: "Beans",
-        text: "A protein-rich legume at the centre of everyday Nigerian meals.",
+        title: "Legumes",
+        text: "Beans, cowpeas and groundnuts bring nutrition, resilience and variety to everyday food markets.",
+        to: "/tishino/contact?topic=Distribution%20%26%20offtake",
+        linkLabel: "Discuss distribution",
       },
       {
-        title: "Maize",
-        text: "A versatile cereal used for food, animal feed and further processing.",
+        title: "Roots & tubers",
+        text: "Yams and cassava are foundational staples with value across household use and further processing.",
+        to: "/tishino/contact?topic=Agricultural%20partnership",
+        linkLabel: "Start a partnership enquiry",
       },
+    ],
+    staples: [
+      "Rice",
+      "Maize",
+      "Millet",
+      "Sorghum",
+      "Beans & cowpeas",
+      "Groundnuts",
+      "Yams",
+      "Cassava",
     ],
     growth: ["Livestock", "Poultry"],
   },

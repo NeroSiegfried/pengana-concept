@@ -4,7 +4,6 @@ import {
 } from "../../components/blocks/EditorialBlocks.jsx";
 import ContactForm from "../../components/blocks/ContactForm.jsx";
 import BusinessPageFrame from "../../components/chrome/BusinessPageFrame.jsx";
-import ActionLink from "../../components/ui/ActionLink.jsx";
 import OfficeMap from "../../components/ui/OfficeMap.jsx";
 import Reveal from "../../components/ui/Reveal.jsx";
 import { BUSINESSES } from "../../content/businesses.js";
@@ -29,6 +28,22 @@ export default function PropertiesContact() {
         text="For development, sales, leasing and lettings, management, or short-let accommodation."
       />
 
+      <ContactForm
+        eyebrow="Property enquiry"
+        title="Tell the Jos team what you have in mind."
+        intro="Choose a route first. Your subject and details stay together, so the team can respond with useful context."
+        defaultBusiness="Pengana Properties"
+        business="properties"
+        topics={[
+          "Property development",
+          "Buying a property",
+          "Leasing & lettings",
+          "Property management",
+          "Short-let & serviced apartments",
+          "Partnerships",
+        ]}
+      />
+
       <section className="entity-contact">
         <Reveal className="entity-contact__address">
           <AddressBlock
@@ -51,31 +66,6 @@ export default function PropertiesContact() {
           ))}
         </Reveal>
       </section>
-
-      <Reveal as="section" className="enquiry-routes">
-        <p className="eyebrow">What is your enquiry about?</p>
-        <div>
-          {[
-            "Property development",
-            "Sales",
-            "Leasing & lettings",
-            "Property management",
-            "Short-let & serviced apartments",
-          ].map((item) => (
-            <span key={item}>{item}</span>
-          ))}
-        </div>
-        <ActionLink to="/contact" variant="line">
-          Group contact directory
-        </ActionLink>
-      </Reveal>
-
-      <ContactForm
-        eyebrow="Property enquiry"
-        title="Send the Jos team a message."
-        defaultBusiness="Pengana Properties"
-        business="properties"
-      />
     </BusinessPageFrame>
   );
 }

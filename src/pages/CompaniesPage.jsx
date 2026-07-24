@@ -11,21 +11,33 @@ import { IMAGES } from "../content/images.js";
 const ENTRIES = [
   {
     business: BUSINESSES.properties,
-    image: IMAGES.properties.hero,
+    images: [
+      IMAGES.properties.hero,
+      IMAGES.properties.lifestyle,
+      IMAGES.properties.detail,
+    ],
     detail:
-      "Development, sales, leasing and lettings, property management, and short-let hospitality from Jos.",
+      "A place-led business in Jos, connecting development, sales, leasing, management and a more personal hospitality experience.",
   },
   {
     business: BUSINESSES.tishino,
-    image: IMAGES.tishino.hero,
+    images: [
+      IMAGES.tishino.hero,
+      IMAGES.tishino.staples,
+      IMAGES.tishino.operations,
+    ],
     detail:
-      "Rice, beans and maize are the present crop focus, with livestock and poultry identified as growth areas.",
+      "Staple agriculture across grains, legumes, roots and tubers, with livestock and poultry identified as directions for growth.",
   },
   {
     business: BUSINESSES.sunab,
-    image: IMAGES.sunab.hero,
+    images: [
+      IMAGES.sunab.hero,
+      IMAGES.sunab.infrastructure,
+      IMAGES.sunab.network,
+    ],
     detail:
-      "Carrier services under a separate board and brand, with more information on Sunab’s own website.",
+      "Carrier and interconnect infrastructure that helps operators extend reach and move voice traffic reliably.",
   },
 ];
 
@@ -46,15 +58,23 @@ export default function CompaniesPage() {
       />
 
       <section className="company-index">
-        {ENTRIES.map(({ business, image, detail }, index) => (
+        {ENTRIES.map(({ business, images, detail }, index) => (
           <Reveal
             as="article"
             className={`company-index__item company-index__item--${business.id}`}
             key={business.id}
           >
-            <div className="company-index__image">
-              <img src={image} alt="" />
-              <span>0{index + 1}</span>
+            <div className="company-index__gallery">
+              <div className="company-index__image company-index__image--lead">
+                <img src={images[0]} alt="" />
+                <span>0{index + 1}</span>
+              </div>
+              <div className="company-index__image company-index__image--detail">
+                <img src={images[1]} alt="" loading="lazy" />
+              </div>
+              <div className="company-index__image company-index__image--detail">
+                <img src={images[2]} alt="" loading="lazy" />
+              </div>
             </div>
             <div className="company-index__copy">
               <p className="eyebrow">{business.eyebrow}</p>

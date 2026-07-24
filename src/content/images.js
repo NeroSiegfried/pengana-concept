@@ -19,6 +19,7 @@ export const IMAGES = {
     development: "/images/properties/development.jpg",
     statement: "/images/properties/statement.jpg",
     duotone: "/images/properties/duotone.jpg",
+    lifestyle: "/images/properties/lifestyle.jpg",
   },
   tishino: {
     hero: "/images/tishino/hero.jpg",
@@ -28,10 +29,12 @@ export const IMAGES = {
     operations: "/images/tishino/operations.jpg",
     statement: "/images/tishino/statement.jpg",
     produce: "/images/tishino/produce.jpg",
+    staples: "/images/tishino/staples.jpg",
   },
   sunab: {
     hero: "/images/sunab/hero.jpg",
     network: "/images/sunab/network.jpg",
     statement: "/images/sunab/statement.jpg",
+    infrastructure: "/images/sunab/infrastructure.jpg",
   },
 };

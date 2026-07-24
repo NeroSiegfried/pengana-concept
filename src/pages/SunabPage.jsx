@@ -4,6 +4,8 @@ import {
   ImageStatement,
   SplitStory,
 } from "../components/blocks/EditorialBlocks.jsx";
+import ContactForm from "../components/blocks/ContactForm.jsx";
+import ActionLink from "../components/ui/ActionLink.jsx";
 import PageFrame from "../components/chrome/PageFrame.jsx";
 import OfficeMap from "../components/ui/OfficeMap.jsx";
 import Reveal from "../components/ui/Reveal.jsx";
@@ -38,11 +40,14 @@ export default function SunabPage() {
         text={SUNAB.summary}
         actions={[
           {
-            label: "Visit the Sunab website",
-            to: SUNAB.externalUrl,
-            external: true,
+            label: "Explore the network story",
+            to: "#network-story",
           },
-          { label: "Back to the group", to: "/companies", variant: "glass" },
+          {
+            label: "Carrier enquiry",
+            to: "/contact?business=Sunab%20Telecoms%20Services&topic=Carrier%20services",
+            variant: "glass",
+          },
         ]}
         align="center"
       />
@@ -56,31 +61,45 @@ export default function SunabPage() {
           "Sunab sits in the interconnect layer of the network — the infrastructure that lets mobile operators exchange traffic, reach new destinations and route calls efficiently across Nigeria and beyond.",
           "It works quietly behind the operators most people know, providing the carrier and interconnect services that keep voice moving.",
         ]}
-        action={{
-          label: "Open the Sunab website",
-          to: SUNAB.externalUrl,
-          external: true,
-        }}
+        action={{ label: "See the service landscape", to: "#services" }}
         caption="Kukwaba District · Abuja"
         flip
       />
 
-      <ImageStatement
-        image={IMAGES.sunab.statement}
-        imageAlt="Network connectivity, abstract"
-        eyebrow="Infrastructure"
-        title="The connections behind every call."
-        text="Carrier services are invisible when they work. Sunab's job is to make reach and reliability something operators never have to think about."
-        position="right"
-      />
+      <section className="sunab-network-story" id="network-story">
+        <Reveal className="sunab-network-story__copy">
+          <p className="eyebrow">Behind the network</p>
+          <h2>Infrastructure, people and routes working as one.</h2>
+          <p>
+            A carrier service is not a single box. It is the work of connecting
+            infrastructure, monitoring traffic, resolving queries and keeping
+            routes useful as demand changes.
+          </p>
+        </Reveal>
+        <Reveal className="sunab-network-story__lead">
+          <img
+            src={IMAGES.sunab.infrastructure}
+            alt="Network engineer inspecting carrier infrastructure"
+            loading="lazy"
+          />
+          <span>Network operations · Abuja</span>
+        </Reveal>
+        <Reveal className="sunab-network-story__detail">
+          <img
+            src={IMAGES.sunab.statement}
+            alt="Telecommunications network detail"
+            loading="lazy"
+          />
+        </Reveal>
+      </section>
 
-      <section className="sunab-services-section">
+      <section className="sunab-services-section" id="services">
         <Reveal className="sunab-services-section__head">
           <p className="eyebrow">Services snapshot</p>
           <h2>Where Sunab helps operators.</h2>
           <p>
-            An indicative view of Sunab's carrier and interconnect offering. The
-            live catalogue is maintained on the Sunab website.
+            Eight ways Sunab supports the movement, management and experience of
+            voice traffic across operator networks.
           </p>
         </Reveal>
         <div className="sunab-services">
@@ -92,6 +111,15 @@ export default function SunabPage() {
           ))}
         </div>
       </section>
+
+      <ImageStatement
+        image={IMAGES.sunab.statement}
+        imageAlt="Network connectivity, abstract"
+        eyebrow="The invisible layer"
+        title="Reach is built route by route."
+        text="Operators experience carrier infrastructure through dependable destinations, clean traffic and responsive support—not through a marketing handoff."
+        position="right"
+      />
 
       <section className="sunab-capabilities">
         <Reveal className="sunab-capabilities__head">
@@ -109,8 +137,22 @@ export default function SunabPage() {
         </div>
       </section>
 
-      <Reveal as="section" className="sunab-handoff">
-        <div className="sunab-handoff__office">
+      <Reveal as="section" className="sunab-office">
+        <div className="sunab-office__intro">
+          <p className="eyebrow">Work with Sunab</p>
+          <h2>A carrier conversation starts with the route.</h2>
+          <p>
+            Share the destinations, traffic profile and support requirement
+            behind your enquiry. The team can take the conversation from there.
+          </p>
+          <ActionLink
+            to="/contact?business=Sunab%20Telecoms%20Services&topic=Carrier%20services"
+            variant="solid"
+          >
+            Start a carrier enquiry
+          </ActionLink>
+        </div>
+        <div className="sunab-office__location">
           <p className="eyebrow">Sunab office</p>
           <AddressBlock
             label={SUNAB.office.label}
@@ -123,6 +165,18 @@ export default function SunabPage() {
             className="sunab-handoff__map"
           />
         </div>
+      </Reveal>
+
+      <ContactForm
+        eyebrow="Carrier enquiry"
+        title="Put the network requirement into context."
+        intro="Choose the closest service, then share destinations, expected traffic and the kind of support you need."
+        defaultBusiness="Sunab Telecoms Services"
+        business="sunab"
+        topics={SUNAB.services}
+      />
+
+      <Reveal as="section" className="sunab-handoff">
         <a
           href={SUNAB.externalUrl}
           target="_blank"
@@ -131,9 +185,12 @@ export default function SunabPage() {
           aria-label="Open sunabtelecomservices.com in a new tab"
         >
           <span className="sunab-handoff__kicker">
-            The full picture lives on Sunab's own site
+            Continue to Sunab’s dedicated service website
           </span>
-          <strong>sunabtelecomservices.com</strong>
+          <strong>Technical catalogue &amp; company detail</strong>
+          <span className="sunab-handoff__domain">
+            sunabtelecomservices.com
+          </span>
           <span className="sunab-handoff__arrow" aria-hidden="true">
             ↗
           </span>

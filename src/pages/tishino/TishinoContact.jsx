@@ -4,7 +4,6 @@ import {
 } from "../../components/blocks/EditorialBlocks.jsx";
 import ContactForm from "../../components/blocks/ContactForm.jsx";
 import BusinessPageFrame from "../../components/chrome/BusinessPageFrame.jsx";
-import ActionLink from "../../components/ui/ActionLink.jsx";
 import OfficeMap from "../../components/ui/OfficeMap.jsx";
 import Reveal from "../../components/ui/Reveal.jsx";
 import { BUSINESSES } from "../../content/businesses.js";
@@ -26,7 +25,23 @@ export default function TishinoContact() {
             conversation.
           </>
         }
-        text="For rice, beans, maize or a wider Tishino Ventures enquiry."
+        text="For staple crop supply, cultivation, partnerships or a wider Tishino Ventures enquiry."
+      />
+
+      <ContactForm
+        eyebrow="Agriculture enquiry"
+        title="Begin with the kind of conversation."
+        intro="A supply conversation needs different context from a partnership. Choose a subject and tell us what outcome you are looking for."
+        defaultBusiness="Tishino Ventures"
+        business="tishino"
+        topics={[
+          "Staple crop supply",
+          "Cultivation & operations",
+          "Distribution & offtake",
+          "Agricultural partnership",
+          "Livestock & poultry",
+          "General agriculture enquiry",
+        ]}
       />
 
       <section className="entity-contact">
@@ -51,27 +66,6 @@ export default function TishinoContact() {
           ))}
         </Reveal>
       </section>
-
-      <Reveal as="section" className="enquiry-routes">
-        <p className="eyebrow">Current subjects</p>
-        <div>
-          <span>Rice</span>
-          <span>Beans</span>
-          <span>Maize</span>
-          <span>General agriculture enquiry</span>
-          <span>Livestock & poultry growth area</span>
-        </div>
-        <ActionLink to="/contact" variant="line">
-          Group contact directory
-        </ActionLink>
-      </Reveal>
-
-      <ContactForm
-        eyebrow="Agriculture enquiry"
-        title="Send Tishino Ventures a message."
-        defaultBusiness="Tishino Ventures"
-        business="tishino"
-      />
     </BusinessPageFrame>
   );
 }

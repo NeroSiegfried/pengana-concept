@@ -39,6 +39,7 @@ Paths are relative to `public/`. Referenced from `src/content/images.js`.
 | `images/properties/development.jpg` | Services — development | Landscape 3:2 | 1500×1000 | Building / construction / architecture in progress. |
 | `images/properties/statement.jpg` | Full-bleed statement band | Landscape 16:9 | 2000×1125 | Building against sky; works under white text. |
 | `images/properties/duotone.jpg` | Tinted editorial band | Landscape 16:9 | 2000×1125 | Architecture shown as a warm bronze duotone. |
+| `images/properties/lifestyle.jpg` | Portfolio lifestyle detail | Landscape 3:2 | 1536×1024 | Warm apartment terrace and a view across Jos. |
 
 ## Tishino Ventures (natural / earthy, leaf-green accent)
 
@@ -51,12 +52,14 @@ Paths are relative to `public/`. Referenced from `src/content/images.js`.
 | `images/tishino/operations.jpg` | Operations | Landscape 3:2 | 1500×1000 | Farmland, irrigation or field work. |
 | `images/tishino/statement.jpg` | Full-bleed statement band | Landscape 16:9 | 2000×1125 | Fields shown as a green duotone under white text. |
 | `images/tishino/produce.jpg` | Produce — feature | Portrait 4:5 | 1200×1500 | Tall crop of fields / harvest. |
+| `images/tishino/staples.jpg` | Staple landscape | Landscape 3:2 | 1536×1024 | Grains, legumes, roots and tubers beside cultivated fields. |
 
 ## Sunab Telecoms (internal landing — navy/silver, not Sunab's own colours)
 
 | Path | Where | Orientation | ~Size | Description |
 |---|---|---|---|---|
 | `images/sunab/hero.jpg` | Sunab hero | Landscape 16:9 | 2000×1125 | Telecom mast / network infrastructure at dusk. |
+| `images/sunab/infrastructure.jpg` | Network story | Landscape 3:2 | 1536×1024 | Nigerian network engineer inside a carrier infrastructure facility. |
 | `images/sunab/network.jpg` | "What Sunab does" | Portrait 4:5 | 1200×1500 | Fibre, data centre or network hardware detail. |
 | `images/sunab/statement.jpg` | Handoff band | Landscape 16:9 | 2000×1125 | Network / connectivity shown as a deep-blue duotone. |
 

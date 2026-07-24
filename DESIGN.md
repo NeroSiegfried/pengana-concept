@@ -87,7 +87,8 @@ The site is image-led, not a brochure: full-bleed statements, split-story bands,
 a produce gallery, portrait board tiles and live maps. Every `<img>` points at a
 stable placeholder in `public/images/` documented in [images.md](./images.md);
 overwrite the file in place with real photography — no code or path changes.
-Board portraits are display-serif monograms until approved photos replace them.
+Board portraits use the supplied local photography and sit in an editorial
+three-column grid with centered incomplete rows.
 
 ## Maps
 

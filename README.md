@@ -3,10 +3,10 @@
 A lean React + Vite website for Pengana Concept Limited and its businesses:
 Pengana Properties, Tishino Ventures, and Sunab Telecoms Services.
 
-The redesign is intentionally content-conservative. It uses only the business
-identities, sectors, locations, directors, telephone lines, and relationships
-present in the supplied brief. Unverified projects, statistics, reviews, news,
-social accounts, email addresses, and forms are not published.
+The redesign is image-led and interaction-rich while keeping factual claims
+grounded in the supplied brief. It includes responsive business storytelling,
+themed navigation, contextual enquiry forms, office maps and art-directed
+photography without inventing projects, statistics, reviews or social accounts.
 
 ## Run locally
 
@@ -81,5 +81,5 @@ The site is image-led. Every `<img>` points at a purpose-named placeholder under
 business so the layout reads as finished today). To use real photography,
 **overwrite the file in place** — the paths never change and nothing needs
 renaming. [images.md](./images.md) documents each slot's purpose, orientation and
-size. Board portraits are display-serif monograms until approved photos replace
-them. Maps use Leaflet with a keyless CARTO basemap.
+size. Board portraits use the supplied local photography. Maps use Leaflet with
+a keyless CARTO basemap.

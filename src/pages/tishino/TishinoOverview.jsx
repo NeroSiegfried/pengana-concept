@@ -23,7 +23,7 @@ export default function TishinoOverview() {
         image={IMAGES.tishino.hero}
         imageAlt="Wide view of cultivated farmland under open sky"
         eyebrow="A Pengana Concept company · Abuja"
-        title="Staple crops. Grounded growth."
+        title="Everyday staples. Grounded growth."
         text={TISHINO.summary}
         actions={[
           { label: "Explore produce", to: "/tishino/produce" },
@@ -40,10 +40,10 @@ export default function TishinoOverview() {
         image={IMAGES.tishino.produce}
         imageAlt="Cultivated farmland"
         eyebrow="Tishino Ventures"
-        title="Rooted in Nigerian staples."
+        title="Rooted in what people eat every day."
         text={[
-          "Tishino cultivates the everyday crops Nigerian homes and markets rely on — rice, beans and maize among them. Livestock and poultry are named as areas for growth, not finished operations.",
-          "The business keeps its story grounded, describing the work it does today rather than claiming scale it has not yet documented.",
+          "Tishino works in the broad staple-food system: grains, legumes, roots and tubers that connect cultivated land to Nigerian homes and markets.",
+          "Rice, beans and maize are examples, not the whole story. The opportunity also includes millet, sorghum, cowpeas, groundnuts, yams and cassava.",
         ]}
         action={{ label: "See the current focus", to: "/tishino/operations" }}
         caption="Abuja · Nigeria"
@@ -51,8 +51,8 @@ export default function TishinoOverview() {
 
       <section className="produce-section">
         <Reveal className="produce-section__head">
-          <p className="eyebrow">Crop focus</p>
-          <h2>Staples we grow today.</h2>
+          <p className="eyebrow">Food categories</p>
+          <h2>One landscape, many staples.</h2>
         </Reveal>
         <NumberedGrid items={TISHINO.produce} columns={3} />
       </section>
@@ -61,9 +61,12 @@ export default function TishinoOverview() {
         image={IMAGES.tishino.statement}
         imageAlt="Cultivated fields in green tones"
         eyebrow="Agriculture"
-        title="Describe the work clearly. Let confirmed detail follow."
-        text="The site keeps the current offer concise until production scale, locations, availability and supply arrangements can be documented."
-        action={{ label: "Agriculture enquiries", to: "/tishino/contact" }}
+        title="Cultivation begins with the land, but it ends with people."
+        text="The useful conversation is not only which crop. It is also where it is needed, in what form, at what volume and on what timeline."
+        action={{
+          label: "Start an agriculture enquiry",
+          to: "/tishino/contact?topic=General%20agriculture%20enquiry",
+        }}
         position="bottom"
       />
 
