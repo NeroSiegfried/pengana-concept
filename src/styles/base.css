@@ -237,7 +237,7 @@ p {
   background: var(--action-icon-bg);
   transform: translateY(-50%);
   transition:
-    left 600ms var(--ease-spring),
+    left 540ms var(--ease-spring-soft),
     color 360ms var(--ease-out),
     background-color 360ms var(--ease-out);
 }
@@ -250,48 +250,49 @@ p {
 .action__arrow-icon {
   width: 16px;
   height: 16px;
-  transition: transform 520ms var(--ease-spring);
+  transition: transform 460ms var(--ease-spring-soft);
 }
 
 .action:is(:hover, :focus-visible) .action__arrow-icon {
   transform: rotate(45deg);
 }
 
-/* Label slides left to clear the arrow's landing spot; the two stacked copies
-   cross-swap so the text is replaced. */
+/* Two identical, stacked copies of the label form a conveyor. At rest the first
+   copy sits to the right of the (left-parked) arrow, and the second waits just
+   off the left edge. On hover both travel right together, in sync with the
+   arrow: the visible copy exits past the right edge while the waiting copy
+   slides in from the left to take its place. No cross-fade, no leftward slide —
+   the button clips the overflow so the copies sweep across the whole surface. */
 .action__label {
   position: relative;
   display: grid;
-  overflow: hidden;
+  overflow: visible;
   padding-block: 6px;
   margin-block: -6px;
-  transition: transform 600ms var(--ease-spring);
-}
-
-.action:is(:hover, :focus-visible) .action__label {
-  transform: translateX(calc(var(--label-pad) - var(--icon-reserve)));
 }
 
 .action__label-text {
   grid-area: 1 / 1;
-  transition:
-    transform 460ms var(--ease-out),
-    opacity 300ms ease;
+  white-space: nowrap;
+  transition: transform 560ms var(--ease-out);
+  will-change: transform;
 }
 
+/* The waiting copy: parked off the left edge, to the left of the arrow. */
 .action__label-text--next {
-  opacity: 0;
-  transform: translateX(65%);
+  transform: translateX(calc(-100% - var(--icon-reserve) - 6px));
 }
 
+/* On hover both copies travel right together with the arrow. The visible copy
+   exits past the right edge. The waiting copy arrives at the MIRRORED slot —
+   shifted left so it sits in the space the arrow vacated, leaving room on the
+   right for the arrow now parked there (rather than colliding with it). */
 .action:is(:hover, :focus-visible) .action__label-text {
-  opacity: 0;
-  transform: translateX(-65%);
+  transform: translateX(calc(100% + var(--label-pad) + 10px));
 }
 
 .action:is(:hover, :focus-visible) .action__label-text--next {
-  opacity: 1;
-  transform: translateX(0);
+  transform: translateX(calc(var(--label-pad) - var(--icon-reserve)));
 }
 
 /* Variants — each shifts colour on hover in a way that suits its surface. */
@@ -392,7 +393,7 @@ p {
   width: 1.05em;
   height: 1.05em;
   flex: none;
-  transition: transform 460ms var(--ease-spring);
+  transition: transform 460ms var(--ease-spring-soft);
 }
 
 .action--line:is(:hover, :focus-visible) .action__arrow-line {

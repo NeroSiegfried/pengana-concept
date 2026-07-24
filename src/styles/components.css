@@ -173,13 +173,27 @@
 .wordmark {
   display: inline-flex;
   width: max-content;
-  flex-direction: column;
-  gap: 0;
+  flex-direction: row;
+  align-items: center;
+  gap: 11px;
   color: currentColor;
   font-weight: 600;
   letter-spacing: -0.04em;
   line-height: 0.78;
   text-transform: uppercase;
+}
+
+.wordmark__mark {
+  flex: none;
+  height: 30px;
+  width: auto;
+  color: inherit;
+}
+
+.wordmark__text {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 .wordmark__primary {
