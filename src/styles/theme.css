@@ -6,13 +6,17 @@
   --section-space: clamp(96px, 11vw, 176px);
   --content-max: 1680px;
 
-  /* Shape system: pills stay for actions on media; surfaces get a measured
-     radius; one asymmetric clip is used at a time for accent. */
-  --radius-s: 10px;
-  --radius-m: 16px;
-  --radius-l: 26px;
+  /* Shape system: one measured family for every regular surface. Attached
+     plates use the same radius; the chamfer is reserved for deliberate
+     two-panel editorial compositions, never as a business identifier. */
+  --radius-s: 12px;
+  --radius-m: 20px;
+  --radius-l: 32px;
+  --plate-radius: 20px;
+  --plate-corners:
+    var(--plate-radius) var(--plate-radius) var(--plate-radius) 4px;
   --radius-pill: 999px;
-  --chamfer: clamp(40px, 6vw, 72px);
+  --chamfer: clamp(34px, 4vw, 56px);
 
   --paper: #f4f1e9;
   --paper-bright: #fbfaf7;

@@ -1,10 +1,10 @@
 # Image slots
 
-Every image on the site is a **placeholder you can overwrite in place**. The
-current files are art-directed crops of the original concept photography, tinted
-per business so the site looks finished today. To use your own photography
-(Unsplash or otherwise), just **save your file over the one at the same path** —
-no renaming, no code changes.
+Every image on the site is a **replaceable editorial slot**. The current files
+combine the original concept photography with art-directed documentary images
+created for the portfolio and enquiry stories. To use approved production
+photography, just **save your file over the one at the same path** — no renaming,
+no code changes.
 
 - Keep the **same file name and `.jpg` extension** (e.g. drop your photo on top
   of `public/images/tishino/hero.jpg`).
@@ -37,6 +37,7 @@ Paths are relative to `public/`. Referenced from `src/content/images.js`.
 | `images/properties/stay.jpg` | Overview + Stays — hospitality | Portrait 4:5 | 1200×1500 | Warm, furnished interior; inviting short-let / apartment feel. |
 | `images/properties/detail.jpg` | Detail tile | Square 1:1 | 1200×1200 | Interior or material close-up (timber, textile, stone). |
 | `images/properties/development.jpg` | Services — development | Landscape 3:2 | 1500×1000 | Building / construction / architecture in progress. |
+| `images/properties/development-team.jpg` | Portfolio — development team | Landscape 3:2 | 1535×1024 | Nigerian architect and site engineer reviewing a residential development in Jos. |
 | `images/properties/statement.jpg` | Full-bleed statement band | Landscape 16:9 | 2000×1125 | Building against sky; works under white text. |
 | `images/properties/duotone.jpg` | Tinted editorial band | Landscape 16:9 | 2000×1125 | Architecture shown as a warm bronze duotone. |
 | `images/properties/lifestyle.jpg` | Portfolio lifestyle detail | Landscape 3:2 | 1536×1024 | Warm apartment terrace and a view across Jos. |
@@ -53,6 +54,9 @@ Paths are relative to `public/`. Referenced from `src/content/images.js`.
 | `images/tishino/statement.jpg` | Full-bleed statement band | Landscape 16:9 | 2000×1125 | Fields shown as a green duotone under white text. |
 | `images/tishino/produce.jpg` | Produce — feature | Portrait 4:5 | 1200×1500 | Tall crop of fields / harvest. |
 | `images/tishino/staples.jpg` | Staple landscape | Landscape 3:2 | 1536×1024 | Grains, legumes, roots and tubers beside cultivated fields. |
+| `images/tishino/roots-sorting.jpg` | Portfolio — roots and tubers | Landscape 3:2 | 1536×1024 | Nigerian farm workers sorting yams and cassava after harvest. |
+| `images/tishino/distribution.jpg` | Portfolio — distribution | Landscape 3:2 | 1536×1024 | Agricultural warehouse team preparing mixed staples for distribution. |
+| `images/tishino/agronomy.jpg` | Portfolio + contact — agronomy | Landscape 3:2 | 1536×1024 | Nigerian agronomist inspecting soil and mixed crops in the field. |
 
 ## Sunab Telecoms (internal landing — navy/silver, not Sunab's own colours)
 
@@ -61,6 +65,9 @@ Paths are relative to `public/`. Referenced from `src/content/images.js`.
 | `images/sunab/hero.jpg` | Sunab hero | Landscape 16:9 | 2000×1125 | Telecom mast / network infrastructure at dusk. |
 | `images/sunab/infrastructure.jpg` | Network story | Landscape 3:2 | 1536×1024 | Nigerian network engineer inside a carrier infrastructure facility. |
 | `images/sunab/network.jpg` | "What Sunab does" | Portrait 4:5 | 1200×1500 | Fibre, data centre or network hardware detail. |
+| `images/sunab/field-engineer.jpg` | Portfolio — field engineering | Landscape 16:9 | 1672×941 | Nigerian telecom engineer inspecting rooftop microwave equipment in Abuja. |
+| `images/sunab/network-operations.jpg` | Portfolio + contact — network operations | Landscape 16:9 | 1712×919 | Nigerian carrier operations team monitoring a network control room. |
+| `images/sunab/fibre-operations.jpg` | Portfolio — fibre operations | Landscape 16:9 | 1647×955 | Nigerian technician splicing fibre at an outdoor distribution cabinet. |
 | `images/sunab/statement.jpg` | Handoff band | Landscape 16:9 | 2000×1125 | Network / connectivity shown as a deep-blue duotone. |
 
 ## Board portraits (optional — monogram placeholders until real photos exist)

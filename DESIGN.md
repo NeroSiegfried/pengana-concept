@@ -68,27 +68,30 @@ handoff accent.
 
 ## Shape language
 
-Two shape families, applied on purpose rather than everywhere:
+The shape system is small and explicit:
 
-- **Actions** keep the pill where they sit on media and heroes; utility controls
-  use a measured rounded rectangle (`--radius-s`), and in-copy actions are an
-  underlined line-link. The pill is not the default for everything.
+- **Actions** use one max-content pill with a dedicated circular arrow control;
+  in-copy actions use the same motion grammar as an underlined line-link.
 - **Surfaces** — photographic cards, split-story media, portraits, maps — carry
-  a measured radius (`--radius-m`). Structural ruled grids stay crisp.
+  one of the measured `--radius-s/m/l` values. Structural ruled grids stay
+  crisp.
+- **Attached plates** share `--plate-corners` everywhere: portfolio captions,
+  contact-image captions and the mobile home cards no longer improvise separate
+  corner recipes.
 
-One asymmetric device is used at a time (a single chamfered corner, an unequal
-image grid, a stepped panel) for the non-square energy of Furnexa. **The clip
-always lands on an image corner, never where copy sits** — the earlier Tishino
-card cut its own text; the chamfer now sits upper-left, clear of the label.
+A chamfer is reserved for the deliberate two-panel Properties overview
+composition. It is never used as a random business identifier and never cuts
+through copy.
 
 ## Imagery
 
 The site is image-led, not a brochure: full-bleed statements, split-story bands,
 a produce gallery, portrait board tiles and live maps. Every `<img>` points at a
-stable placeholder in `public/images/` documented in [images.md](./images.md);
-overwrite the file in place with real photography — no code or path changes.
-Board portraits use the supplied local photography and sit in an editorial
-three-column grid with centered incomplete rows.
+stable editorial asset in `public/images/` documented in
+[images.md](./images.md); overwrite the file in place with approved production
+photography — no code or path changes. Board entries keep monogram fallbacks
+until approved portraits are supplied and sit in an editorial three-column grid
+with centered incomplete rows.
 
 ## Maps
 
@@ -110,8 +113,8 @@ plus a competing per-business tab bar.
 - **Businesses mega-panel.** The header's "Businesses" control opens one
   full-width panel showing the three businesses with *every* sub-page, each
   column in its own accent — plus an "All businesses" link. It does **not**
-  repeat About/Contact (those stay as their own header links). Opens on hover or
-  click.
+  repeat About/Contact (those stay as their own header links). It opens on click
+  and supports direct keyboard entry and return.
 - **Context row, part of the header.** On a business page the header gains a
   second row that shares its colour and frost: `Pengana Group / Business` on the
   left and that mini-site's page links on the right, the active one underlined in
@@ -136,8 +139,8 @@ plus a competing per-business tab bar.
 
 Motion is restrained and functional:
 
-- a short page-enter fade/rise on every route, and a slow settle-zoom on hero
-  imagery;
+- a short curtain reveal and copy rise on every route, plus a restrained
+  settle-zoom on hero imagery;
 - the home showcase expands the hovered panel and reveals its summary while the
   others shrink;
 - image scale on image-led card hover; arrow travel on actionable elements;

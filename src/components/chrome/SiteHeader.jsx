@@ -20,6 +20,10 @@ export default function SiteHeader() {
   const [megaOpen, setMegaOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const menuButtonRef = useRef(null);
+  const mobileMenuRef = useRef(null);
+  const desktopTriggerRef = useRef(null);
+  const desktopContactRef = useRef(null);
+  const megaRef = useRef(null);
   const businessMenuRef = useRef(null);
 
   const site = siteFromPath(pathname);
@@ -51,9 +55,13 @@ export default function SiteHeader() {
     }
     function closeOnEscape(event) {
       if (event.key !== "Escape") return;
-      setMenuOpen(false);
-      setMegaOpen(false);
-      menuButtonRef.current?.focus();
+      if (menuOpen) {
+        setMenuOpen(false);
+        window.requestAnimationFrame(() => menuButtonRef.current?.focus());
+      } else if (megaOpen) {
+        setMegaOpen(false);
+        window.requestAnimationFrame(() => desktopTriggerRef.current?.focus());
+      }
     }
     document.addEventListener("pointerdown", closeOnOutsideClick);
     document.addEventListener("keydown", closeOnEscape);
@@ -61,7 +69,88 @@ export default function SiteHeader() {
       document.removeEventListener("pointerdown", closeOnOutsideClick);
       document.removeEventListener("keydown", closeOnEscape);
     };
-  }, [megaOpen]);
+  }, [megaOpen, menuOpen]);
+
+  useEffect(() => {
+    if (!menuOpen) return undefined;
+
+    const background = [
+      document.querySelector("main"),
+      document.querySelector(".site-footer"),
+    ].filter(Boolean);
+
+    background.forEach((element) => element.setAttribute("inert", ""));
+
+    function trapFocus(event) {
+      if (event.key !== "Tab") return;
+
+      const links = Array.from(
+        mobileMenuRef.current?.querySelectorAll("a[href]") || [],
+      );
+      const focusables = [menuButtonRef.current, ...links].filter(Boolean);
+      const first = focusables[0];
+      const last = focusables.at(-1);
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    }
+
+    document.addEventListener("keydown", trapFocus);
+    window.requestAnimationFrame(() => {
+      mobileMenuRef.current?.querySelector(".mobile-menu__link")?.focus();
+    });
+
+    return () => {
+      document.removeEventListener("keydown", trapFocus);
+      background.forEach((element) => element.removeAttribute("inert"));
+    };
+  }, [menuOpen]);
+
+  function focusFirstMegaLink(defer = false) {
+    const focus = () => {
+      megaRef.current?.querySelector("a[href]")?.focus();
+    };
+
+    if (defer) {
+      window.requestAnimationFrame(focus);
+    } else {
+      focus();
+    }
+  }
+
+  function handleMegaTriggerKeyDown(event) {
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      setMegaOpen(true);
+      focusFirstMegaLink(true);
+    } else if (event.key === "Tab" && !event.shiftKey && megaOpen) {
+      event.preventDefault();
+      focusFirstMegaLink();
+    }
+  }
+
+  function handleMegaKeyDown(event) {
+    if (event.key !== "Tab") return;
+
+    const links = Array.from(megaRef.current?.querySelectorAll("a[href]") || []);
+    const first = links[0];
+    const last = links.at(-1);
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      setMegaOpen(false);
+      desktopTriggerRef.current?.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      setMegaOpen(false);
+      desktopContactRef.current?.focus();
+    }
+  }
 
   return (
     <div
@@ -84,6 +173,7 @@ export default function SiteHeader() {
               About
             </NavLink>
             <button
+              ref={desktopTriggerRef}
               type="button"
               className={`desktop-nav__link desktop-nav__trigger ${
                 megaOpen ? "is-open" : ""
@@ -91,11 +181,16 @@ export default function SiteHeader() {
               aria-expanded={megaOpen}
               aria-controls="businesses-mega"
               onClick={() => setMegaOpen((value) => !value)}
+              onKeyDown={handleMegaTriggerKeyDown}
             >
               Businesses
               <span className="desktop-nav__caret" aria-hidden="true">⌄</span>
             </button>
-            <NavLink to="/contact" className="desktop-nav__link">
+            <NavLink
+              ref={desktopContactRef}
+              to="/contact"
+              className="desktop-nav__link"
+            >
               Contact
             </NavLink>
           </nav>
@@ -118,11 +213,12 @@ export default function SiteHeader() {
       </header>
 
       <div
+        ref={megaRef}
         id="businesses-mega"
         className={`mega ${megaOpen ? "mega--open" : ""}`}
         aria-hidden={!megaOpen}
         inert={megaOpen ? undefined : ""}
-        onMouseLeave={() => setMegaOpen(false)}
+        onKeyDown={handleMegaKeyDown}
       >
         <div className="mega__inner">
           <div className="mega__head">
@@ -154,12 +250,9 @@ export default function SiteHeader() {
                       {sub.label}
                     </Link>
                   )) || (
-                    <>
-                      <Link to="/sunab">Company overview</Link>
-                      <Link to="/contact?business=Sunab%20Telecoms%20Services&topic=Carrier%20services">
-                        Carrier enquiry
-                      </Link>
-                    </>
+                    <Link to="/sunab?topic=Carrier%20services#carrier-enquiry">
+                      Carrier enquiry
+                    </Link>
                   )}
                 </div>
               </div>
@@ -169,6 +262,7 @@ export default function SiteHeader() {
       </div>
 
       <div
+        ref={mobileMenuRef}
         id="mobile-navigation"
         className={`mobile-menu ${menuOpen ? "mobile-menu--open" : ""}`}
         aria-hidden={!menuOpen}
@@ -218,7 +312,13 @@ export default function SiteHeader() {
                       </NavLink>
                     ))}
                   </div>
-                ) : null}
+                ) : (
+                  <div className="mobile-menu__sub">
+                    <NavLink to="/sunab?topic=Carrier%20services#carrier-enquiry">
+                      Carrier enquiry
+                    </NavLink>
+                  </div>
+                )}
               </div>
             ))}
           </div>

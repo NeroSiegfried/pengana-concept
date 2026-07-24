@@ -5,11 +5,11 @@ import {
   SplitStory,
 } from "../components/blocks/EditorialBlocks.jsx";
 import ContactForm from "../components/blocks/ContactForm.jsx";
-import ActionLink from "../components/ui/ActionLink.jsx";
 import PageFrame from "../components/chrome/PageFrame.jsx";
 import OfficeMap from "../components/ui/OfficeMap.jsx";
 import Reveal from "../components/ui/Reveal.jsx";
 import { BUSINESSES } from "../content/businesses.js";
+import { GROUP, telephoneHref } from "../content/company.js";
 import { IMAGES } from "../content/images.js";
 
 const SUNAB = BUSINESSES.sunab;
@@ -45,7 +45,7 @@ export default function SunabPage() {
           },
           {
             label: "Carrier enquiry",
-            to: "/contact?business=Sunab%20Telecoms%20Services&topic=Carrier%20services",
+            to: "#carrier-enquiry",
             variant: "glass",
           },
         ]}
@@ -137,44 +137,70 @@ export default function SunabPage() {
         </div>
       </section>
 
-      <Reveal as="section" className="sunab-office">
-        <div className="sunab-office__intro">
-          <p className="eyebrow">Work with Sunab</p>
-          <h2>A carrier conversation starts with the route.</h2>
-          <p>
-            Share the destinations, traffic profile and support requirement
-            behind your enquiry. The team can take the conversation from there.
-          </p>
-          <ActionLink
-            to="/contact?business=Sunab%20Telecoms%20Services&topic=Carrier%20services"
-            variant="solid"
-          >
-            Start a carrier enquiry
-          </ActionLink>
+      <section
+        className="contact-composer contact-composer--sunab"
+        data-site="sunab"
+        id="carrier-enquiry"
+      >
+        <div className="contact-composer__main">
+          <Reveal className="contact-composer__intro">
+            <p className="eyebrow">Carrier enquiry</p>
+            <h2>A carrier conversation starts with the route.</h2>
+            <p>
+              Share the destinations, traffic profile and support requirement
+              behind your enquiry. The Sunab team can take the conversation
+              from there.
+            </p>
+            <div className="contact-details">
+              <AddressBlock
+                label={SUNAB.office.label}
+                address={SUNAB.office.address}
+              />
+              <div className="contact-details__phones">
+                <p className="eyebrow">Telephone</p>
+                {GROUP.phones.map((phone) => (
+                  <a href={telephoneHref(phone)} key={phone}>
+                    {phone} <span aria-hidden="true">↗</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal className="contact-composer__form">
+            <ContactForm
+              recipient={SUNAB.name}
+              business="sunab"
+              defaultTopic="Carrier services"
+              contextLabel="Routes, destinations or traffic profile"
+              contextName="networkContext"
+              contextPlaceholder="e.g. Destinations · traffic · support need"
+              subjectPlaceholder="What would you like to discuss with Sunab?"
+              messagePlaceholder="Describe the network requirement, timing and technical context available."
+              submitLabel="Send to Sunab"
+              submissionEndpoint={import.meta.env.VITE_SUNAB_FORM_ENDPOINT}
+            />
+          </Reveal>
         </div>
-        <div className="sunab-office__location">
-          <p className="eyebrow">Sunab office</p>
-          <AddressBlock
-            label={SUNAB.office.label}
-            address={SUNAB.office.address}
+
+        <Reveal as="figure" className="contact-composer__media">
+          <img
+            src={IMAGES.sunab.networkOperations}
+            alt="Engineers monitoring telecommunications network operations"
+            loading="lazy"
           />
+          <figcaption>Network operations · Abuja</figcaption>
+        </Reveal>
+
+        <Reveal className="contact-composer__map">
           <OfficeMap
             coords={SUNAB.office.coords}
-            label="Sunab Telecoms Services"
+            label={SUNAB.name}
             business="sunab"
-            className="sunab-handoff__map"
+            className="contact-composer__office-map"
           />
-        </div>
-      </Reveal>
-
-      <ContactForm
-        eyebrow="Carrier enquiry"
-        title="Put the network requirement into context."
-        intro="Choose the closest service, then share destinations, expected traffic and the kind of support you need."
-        defaultBusiness="Sunab Telecoms Services"
-        business="sunab"
-        topics={SUNAB.services}
-      />
+        </Reveal>
+      </section>
 
       <Reveal as="section" className="sunab-handoff">
         <a

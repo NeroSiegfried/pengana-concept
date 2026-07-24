@@ -8,6 +8,7 @@ import OfficeMap from "../../components/ui/OfficeMap.jsx";
 import Reveal from "../../components/ui/Reveal.jsx";
 import { BUSINESSES } from "../../content/businesses.js";
 import { GROUP, telephoneHref } from "../../content/company.js";
+import { IMAGES } from "../../content/images.js";
 
 const TISHINO = BUSINESSES.tishino;
 
@@ -28,42 +29,66 @@ export default function TishinoContact() {
         text="For staple crop supply, cultivation, partnerships or a wider Tishino Ventures enquiry."
       />
 
-      <ContactForm
-        eyebrow="Agriculture enquiry"
-        title="Begin with the kind of conversation."
-        intro="A supply conversation needs different context from a partnership. Choose a subject and tell us what outcome you are looking for."
-        defaultBusiness="Tishino Ventures"
-        business="tishino"
-        topics={[
-          "Staple crop supply",
-          "Cultivation & operations",
-          "Distribution & offtake",
-          "Agricultural partnership",
-          "Livestock & poultry",
-          "General agriculture enquiry",
-        ]}
-      />
+      <section
+        className="contact-composer contact-composer--tishino"
+        data-site="tishino"
+      >
+        <div className="contact-composer__main">
+          <Reveal className="contact-composer__intro">
+            <p className="eyebrow">Agriculture enquiry</p>
+            <h2>Put the opportunity into practical terms.</h2>
+            <p>
+              Supply, cultivation, distribution and partnership conversations
+              each begin differently. Tell us the outcome you are looking for
+              and the operational context behind it.
+            </p>
+            <div className="contact-details">
+              <AddressBlock
+                label={TISHINO.office.label}
+                address={TISHINO.office.address}
+              />
+              <div className="contact-details__phones">
+                <p className="eyebrow">Telephone</p>
+                {GROUP.phones.map((phone) => (
+                  <a href={telephoneHref(phone)} key={phone}>
+                    {phone} <span aria-hidden="true">↗</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </Reveal>
 
-      <section className="entity-contact">
-        <Reveal className="entity-contact__address">
-          <AddressBlock
-            label={TISHINO.office.label}
-            address={TISHINO.office.address}
+          <Reveal className="contact-composer__form">
+            <ContactForm
+              recipient={TISHINO.name}
+              business="tishino"
+              contextLabel="Produce, quantity or location"
+              contextName="agricultureContext"
+              contextPlaceholder="e.g. Cowpeas · volume · delivery area"
+              subjectPlaceholder="What would you like to discuss with Tishino?"
+              messagePlaceholder="Describe the supply, operating or partnership need and your preferred timing."
+              submitLabel="Send to Tishino Ventures"
+              submissionEndpoint={import.meta.env.VITE_TISHINO_FORM_ENDPOINT}
+            />
+          </Reveal>
+        </div>
+
+        <Reveal as="figure" className="contact-composer__media">
+          <img
+            src={IMAGES.tishino.agronomy}
+            alt="An agronomist examining soil and diversified crop growth"
+            loading="lazy"
           />
+          <figcaption>Agriculture in operation · Nigeria</figcaption>
+        </Reveal>
+
+        <Reveal className="contact-composer__map">
           <OfficeMap
             coords={TISHINO.office.coords}
             label={TISHINO.name}
             business="tishino"
-            className="entity-contact__map"
+            className="contact-composer__office-map"
           />
-        </Reveal>
-        <Reveal className="entity-contact__phones">
-          <p className="eyebrow">Shared telephone lines</p>
-          {GROUP.phones.map((phone) => (
-            <a href={telephoneHref(phone)} key={phone}>
-              {phone} <span aria-hidden="true">↗</span>
-            </a>
-          ))}
         </Reveal>
       </section>
     </BusinessPageFrame>

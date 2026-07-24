@@ -15,7 +15,7 @@ export default function ActionLink({
         <span className="visually-hidden"> (opens in a new tab)</span>
       ) : null}
       <span className="action__arrow" aria-hidden="true">
-        ↗
+        {external ? "↗" : "→"}
       </span>
     </>
   );

@@ -17,6 +17,14 @@ npm run build
 npm run preview
 ```
 
+## Form delivery
+
+Copy `.env.example` to `.env.local` and add verified POST endpoints before
+launch. The group, Properties, Tishino and Sunab forms support separate
+destinations; `VITE_FORM_ENDPOINT` can be used as a shared fallback. Without a
+configured endpoint, submission opens an addressed email draft so no enquiry is
+silently discarded.
+
 ## Current information architecture
 
 ```text
@@ -76,10 +84,9 @@ src/
 
 ## Imagery
 
-The site is image-led. Every `<img>` points at a purpose-named placeholder under
-`public/images/` (art-directed crops of the concept photography, tinted per
-business so the layout reads as finished today). To use real photography,
-**overwrite the file in place** — the paths never change and nothing needs
-renaming. [images.md](./images.md) documents each slot's purpose, orientation and
-size. Board portraits use the supplied local photography. Maps use Leaflet with
-a keyless CARTO basemap.
+The site is image-led. Every `<img>` points at a purpose-named editorial asset
+under `public/images/`. To use approved production photography, **overwrite the
+file in place** — the paths never change and nothing needs renaming.
+[images.md](./images.md) documents each slot's purpose, orientation and size.
+Board entries retain monogram fallbacks until approved portraits are supplied.
+Maps use Leaflet with a keyless CARTO basemap.

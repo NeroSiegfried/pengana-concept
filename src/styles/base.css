@@ -119,17 +119,40 @@ p {
   position: relative;
   min-height: 70vh;
   background: var(--paper-bright);
-  animation: page-enter 560ms var(--ease-out) both;
+  isolation: isolate;
+  animation: page-enter 620ms var(--ease-out) both;
+}
+
+.page::before {
+  position: fixed;
+  inset: 0;
+  z-index: 1150;
+  background: color-mix(in srgb, var(--pale) 38%, var(--paper-bright));
+  content: "";
+  pointer-events: none;
+  transform: scaleY(0);
+  transform-origin: top;
+  animation: page-curtain 640ms var(--ease-out) both;
 }
 
 @keyframes page-enter {
   from {
-    opacity: 0;
-    transform: translateY(14px);
+    opacity: 0.72;
   }
   to {
     opacity: 1;
-    transform: none;
+  }
+}
+
+@keyframes page-curtain {
+  0% {
+    transform: scaleY(1);
+  }
+  32% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0);
   }
 }
 
@@ -157,19 +180,21 @@ p {
   align-items: center;
 }
 
-/* One button system, applied with intent:
-   solid/light/glass  → pill actions, best over media and heroes;
-   ghost              → utility rounded-rectangle (context bar, controls);
-   line               → editorial inline link, the workhorse inside copy. */
+/* Stable CTA geometry adapted from the compact button systems in the supplied
+   references: a max-content label plus a dedicated arrow control. */
 .action {
   --action-bg: var(--accent);
   --action-fg: #fff;
+  --action-arrow-bg: rgba(255, 255, 255, 0.16);
+  --action-arrow-fg: currentColor;
   position: relative;
   display: inline-flex;
   min-height: 52px;
   align-items: center;
-  gap: 14px;
-  padding: 14px 22px;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 7px 8px 7px 20px;
+  overflow: hidden;
   color: var(--action-fg);
   border: 1px solid transparent;
   border-radius: var(--radius-pill);
@@ -180,66 +205,85 @@ p {
   line-height: 1;
   white-space: nowrap;
   transition:
-    background-color 260ms ease,
-    border-color 260ms ease,
-    color 260ms ease,
-    box-shadow 260ms ease,
-    transform 420ms var(--ease-out);
+    background-color 420ms var(--ease-out),
+    border-color 420ms var(--ease-out),
+    color 420ms var(--ease-out);
 }
 
-.action:hover {
-  transform: translateY(-2px);
+.action > span {
+  position: relative;
+  z-index: 1;
 }
 
-.action:active {
-  transform: translateY(0);
+.action:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
 }
 
 .action__arrow {
-  font-size: 1.05rem;
-  transition: transform 440ms var(--ease-spring);
+  display: grid;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  place-items: center;
+  color: var(--action-arrow-fg);
+  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  border-radius: 50%;
+  background: var(--action-arrow-bg);
+  font-size: 0.95rem;
+  transition:
+    color 360ms var(--ease-out),
+    background-color 360ms var(--ease-out),
+    transform 500ms var(--ease-spring);
 }
 
-.action:hover .action__arrow {
-  transform: translate(4px, -4px);
+.action:is(:hover, :focus-visible) .action__arrow {
+  transform: translateX(3px);
 }
 
-.action--solid:hover {
+.action--solid:is(:hover, :focus-visible) {
   --action-bg: var(--deep);
-  box-shadow: var(--shadow-card);
+  --action-arrow-bg: #fff;
+  --action-arrow-fg: var(--deep);
 }
 
 .action--light {
   --action-bg: #fff;
   --action-fg: var(--ink);
+  --action-arrow-bg: var(--ink);
+  --action-arrow-fg: #fff;
 }
 
-.action--light:hover {
+.action--light:is(:hover, :focus-visible) {
   --action-bg: var(--pale);
-  box-shadow: var(--shadow-card);
+  --action-arrow-bg: var(--deep);
 }
 
 .action--glass {
   --action-fg: #fff;
+  --action-arrow-bg: #fff;
+  --action-arrow-fg: var(--ink);
   border-color: var(--light-line);
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(12px);
 }
 
-.action--glass:hover {
+.action--glass:is(:hover, :focus-visible) {
   background: rgba(255, 255, 255, 0.16);
 }
 
 .action--ghost {
   --action-fg: var(--ink);
+  --action-arrow-bg: var(--deep);
+  --action-arrow-fg: #fff;
   min-height: 48px;
-  padding: 12px 18px;
+  padding: 5px 6px 5px 17px;
   border-color: var(--line);
-  border-radius: var(--radius-s);
+  border-radius: var(--radius-pill);
   background: transparent;
 }
 
-.action--ghost:hover {
+.action--ghost:is(:hover, :focus-visible) {
   --action-fg: var(--accent);
   border-color: var(--accent);
 }
@@ -248,14 +292,11 @@ p {
   min-height: 40px;
   padding: 6px 0;
   gap: 10px;
+  overflow: visible;
   color: inherit;
   border: 0;
   border-radius: 0;
   background: none;
-}
-
-.action--line:hover {
-  transform: none;
 }
 
 .action--line::after {
@@ -264,21 +305,32 @@ p {
   inset: auto 0 0;
   height: 1px;
   background: currentColor;
-  opacity: 0.45;
-  transform: scaleX(1);
+  opacity: 0.38;
+  transform: scaleX(0.34);
   transform-origin: left;
   transition:
     transform 460ms var(--ease-out),
     opacity 260ms ease;
 }
 
-.action--line:hover::after {
+.action--line:is(:hover, :focus-visible)::after {
   opacity: 1;
   transform: scaleX(1);
 }
 
 .action--line .action__arrow {
+  width: auto;
+  height: auto;
+  flex-basis: auto;
+  border: 0;
+  border-radius: 0;
+  background: none;
   font-size: 0.95rem;
+}
+
+.action:disabled {
+  cursor: wait;
+  opacity: 0.58;
 }
 
 .reveal {
@@ -340,6 +392,15 @@ p {
 
   .action {
     min-height: 46px;
-    padding-inline: 16px;
+    width: fit-content;
+    max-width: 100%;
+    padding: 5px 6px 5px 17px;
+    text-align: left;
+  }
+
+  .action__arrow {
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
   }
 }

@@ -2,41 +2,36 @@ import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { FORM_ENDPOINT, GROUP } from "../../content/company.js";
 
-const BUSINESS_OPTIONS = [
-  "General enquiry",
-  "Pengana Properties",
-  "Tishino Ventures",
-  "Sunab Telecoms Services",
-];
-
 export default function ContactForm({
-  eyebrow = "Send a message",
-  title = "Tell us what you need.",
-  intro = "Give us enough context to route your enquiry to the right team.",
-  defaultBusiness = "General enquiry",
+  recipient = GROUP.name,
   defaultTopic = "",
-  topics = [],
+  contextLabel = "",
+  contextName = "context",
+  contextPlaceholder = "",
+  subjectPlaceholder = "What would you like to discuss?",
+  messagePlaceholder = "Tell us what you need, where, and when.",
+  submitLabel = "Send enquiry",
+  submissionEndpoint = "",
   business = "concept",
 }) {
   const [searchParams] = useSearchParams();
-  const queryBusiness = searchParams.get("business");
   const queryTopic = searchParams.get("topic");
-  const initialBusiness = BUSINESS_OPTIONS.includes(queryBusiness)
-    ? queryBusiness
-    : defaultBusiness;
   const [status, setStatus] = useState("idle");
   const [values, setValues] = useState({
     name: "",
     email: "",
     phone: "",
-    company: initialBusiness,
-    topic: queryTopic || defaultTopic,
+    subject: queryTopic || defaultTopic,
+    ...(contextLabel ? { [contextName]: "" } : {}),
     message: "",
   });
 
   const endpoint = useMemo(
-    () => import.meta.env.VITE_FORM_ENDPOINT || FORM_ENDPOINT,
-    [],
+    () =>
+      submissionEndpoint ||
+      import.meta.env.VITE_FORM_ENDPOINT ||
+      FORM_ENDPOINT,
+    [submissionEndpoint],
   );
 
   const update = (event) =>
@@ -44,15 +39,18 @@ export default function ContactForm({
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const subject = `Website enquiry — ${values.company}${
-      values.topic ? ` — ${values.topic}` : ""
-    }`;
+    const emailSubject = `Website enquiry — ${recipient} — ${values.subject}`;
+    const context = contextLabel
+      ? `${contextLabel}: ${values[contextName] || "Not provided"}\n`
+      : "";
     const body =
       `Name: ${values.name}\n` +
       `Email: ${values.email}\n` +
       `Phone: ${values.phone || "Not provided"}\n` +
-      `Business: ${values.company}\n` +
-      `Subject: ${values.topic || "General"}\n\n` +
+      `Business: ${recipient}\n` +
+      `Subject: ${values.subject}\n` +
+      context +
+      "\n" +
       `${values.message}\n`;
 
     if (endpoint) {
@@ -64,7 +62,11 @@ export default function ContactForm({
             "Content-Type": "application/json",
             Accept: "application/json",
           },
-          body: JSON.stringify({ subject, ...values }),
+          body: JSON.stringify({
+            ...values,
+            business: recipient,
+            _subject: emailSubject,
+          }),
         });
         setStatus(response.ok ? "sent" : "error");
       } catch {
@@ -74,22 +76,19 @@ export default function ContactForm({
     }
 
     window.location.href = `mailto:${GROUP.email}?subject=${encodeURIComponent(
-      subject,
+      emailSubject,
     )}&body=${encodeURIComponent(body)}`;
     setStatus("sent");
   }
 
   if (status === "sent") {
     return (
-      <section className="contact-form contact-form--done" data-site={business}>
-        <div className="contact-form__head">
-          <p className="eyebrow">{eyebrow}</p>
-          <h2>Thank you. Your enquiry is ready to send.</h2>
-        </div>
+      <div className="contact-form contact-form--done" data-site={business}>
         <div className="contact-form__success">
+          <h2>Thank you. Your enquiry is ready to send.</h2>
           <p>
             {endpoint
-              ? "It has been submitted to the team. They can reply using the details you provided."
+              ? `It has been submitted to ${recipient}. The team can reply using the details you provided.`
               : "Your email app should have opened with the complete enquiry. Review it there and press send."}
           </p>
           <button
@@ -98,51 +97,21 @@ export default function ContactForm({
             onClick={() => setStatus("idle")}
           >
             <span>Send another enquiry</span>
-            <span className="action__arrow" aria-hidden="true">↗</span>
+            <span className="action__arrow" aria-hidden="true">→</span>
           </button>
         </div>
-      </section>
+      </div>
     );
   }
 
   return (
-    <section className="contact-form" data-site={business}>
-      <div className="contact-form__head">
-        <p className="eyebrow">{eyebrow}</p>
-        <h2>{title}</h2>
-        <p>{intro}</p>
-        <div className="contact-form__route">
-          <span>01</span>
-          <p>Choose a subject</p>
-          <span>02</span>
-          <p>Share your details</p>
-          <span>03</span>
-          <p>We route it to the right team</p>
-        </div>
-      </div>
-
-      <form className="contact-form__body" onSubmit={handleSubmit}>
-        {topics.length ? (
-          <fieldset className="topic-picker">
-            <legend className="field__label">What can we help with?</legend>
-            <div>
-              {topics.map((topic) => (
-                <button
-                  type="button"
-                  className={values.topic === topic ? "is-active" : ""}
-                  aria-pressed={values.topic === topic}
-                  onClick={() =>
-                    setValues((prev) => ({ ...prev, topic }))
-                  }
-                  key={topic}
-                >
-                  {topic}
-                </button>
-              ))}
-            </div>
-          </fieldset>
-        ) : null}
-
+    <form
+      className="contact-form"
+      data-site={business}
+      onSubmit={handleSubmit}
+    >
+      <input type="hidden" name="business" value={recipient} />
+      <div className="contact-form__body">
         <div className="contact-form__grid">
           <label className="field">
             <span className="field__label">Name</span>
@@ -167,7 +136,7 @@ export default function ContactForm({
               placeholder="you@example.com"
             />
           </label>
-          <label className="field">
+          <label className="field field--phone">
             <span className="field__label">Phone</span>
             <input
               type="tel"
@@ -178,26 +147,27 @@ export default function ContactForm({
               placeholder="+234"
             />
           </label>
-          <label className="field">
-            <span className="field__label">Enquiry for</span>
-            <select name="company" value={values.company} onChange={update}>
-              {BUSINESS_OPTIONS.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </label>
           <label className="field field--full">
             <span className="field__label">Subject</span>
             <input
-              name="topic"
-              value={values.topic}
+              name="subject"
+              value={values.subject}
               onChange={update}
               required
-              placeholder="What is this about?"
+              placeholder={subjectPlaceholder}
             />
           </label>
+          {contextLabel ? (
+            <label className="field field--full">
+              <span className="field__label">{contextLabel}</span>
+              <input
+                name={contextName}
+                value={values[contextName]}
+                onChange={update}
+                placeholder={contextPlaceholder}
+              />
+            </label>
+          ) : null}
           <label className="field field--full">
             <span className="field__label">Message</span>
             <textarea
@@ -206,7 +176,7 @@ export default function ContactForm({
               onChange={update}
               required
               rows={5}
-              placeholder="Tell us what you need, where, and when."
+              placeholder={messagePlaceholder}
             />
           </label>
         </div>
@@ -217,8 +187,8 @@ export default function ContactForm({
             className="action action--solid"
             disabled={status === "sending"}
           >
-            <span>{status === "sending" ? "Sending…" : "Send enquiry"}</span>
-            <span className="action__arrow" aria-hidden="true">↗</span>
+            <span>{status === "sending" ? "Sending…" : submitLabel}</span>
+            <span className="action__arrow" aria-hidden="true">→</span>
           </button>
           <p className="contact-form__privacy">
             Your details are used only to respond to this enquiry.
@@ -229,7 +199,7 @@ export default function ContactForm({
             </p>
           ) : null}
         </div>
-      </form>
-    </section>
+      </div>
+    </form>
   );
 }

@@ -10,8 +10,9 @@ business before launch.
   office.
 - Pengana Properties: property development, sales, leasing and lettings,
   property management, short-let and serviced apartments; Jos office.
-- Tishino Ventures: agriculture focused on rice, beans and maize; livestock and
-  poultry described only as growth areas; Abuja office.
+- Tishino Ventures: staple agriculture across grains, legumes, roots and
+  tubers; rice, beans and maize are examples rather than the whole offer;
+  livestock and poultry are described only as growth areas; Abuja office.
 - Sunab Telecoms Services: carrier services; separate board, branding and
   website; Abuja office.
 - Supplied shared board, office addresses and telephone lines.
@@ -47,12 +48,14 @@ business before launch.
 4. Whether the two Bitrus name forms are intentionally different.
 5. Official brand assets and wordmark.
 6. Real photography for offices, projects, accommodation, fields and telecoms.
-7. A verified group email (the contact form uses `enquiries@penganaconcept.com`
-   as a placeholder and, with no backend, composes an email in the visitor's mail
-   client). Set `FORM_ENDPOINT` in `src/content/company.js` to capture
-   submissions server-side (Formspree, Netlify Forms, an API route…).
-8. Real projects/listings before restoring Portfolio.
-9. Real farm/produce photography before restoring Gallery.
+7. Verified recipient emails and submission endpoints. Each business form can
+   use its own `VITE_*_FORM_ENDPOINT`; `VITE_FORM_ENDPOINT` is the optional
+   shared fallback. Until one is configured, the forms honestly compose an
+   email to the placeholder `enquiries@penganaconcept.com` instead of pretending
+   a server accepted the message.
+8. Real projects or listings before publishing project-specific claims.
+9. Approved production photography to replace the clearly documented
+   editorial concept imagery where required.
 10. Real roles and a working application route before restoring Careers.
 11. Real dated articles before restoring News.
 12. Privacy/terms pages before linking to them.
