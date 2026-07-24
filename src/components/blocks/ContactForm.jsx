@@ -25,6 +25,7 @@ export default function ContactForm({
     subject: queryTopic || defaultTopic,
     ...(contextLabel ? { [contextName]: "" } : {}),
     message: "",
+    company_url: "", // honeypot — real users never fill this
   });
 
   const endpoint = useMemo(
@@ -64,16 +65,33 @@ export default function ContactForm({
             Accept: "application/json",
           },
           body: JSON.stringify({
-            ...values,
-            business: recipient,
+            name: values.name,
+            email: values.email,
+            phone: values.phone,
+            subject: values.subject,
+            message: values.message,
+            business, // stable id: concept | properties | tishino | sunab
+            recipient, // display name
+            contextLabel: contextLabel || "",
+            context: contextLabel ? values[contextName] || "" : "",
+            company_url: values.company_url || "",
             _subject: emailSubject,
           }),
         });
-        setStatus(response.ok ? "sent" : "error");
+        if (response.ok) {
+          setStatus("sent");
+          return;
+        }
+        // A 4xx is a validation / rate-limit issue — let the visitor retry.
+        if (response.status >= 400 && response.status < 500) {
+          setStatus("error");
+          return;
+        }
+        // 5xx / unconfigured endpoint: fall through to the mail-client path so
+        // enquiries are never lost before the backend is fully set up.
       } catch {
-        setStatus("error");
+        // Network failure: fall through to the mail-client path.
       }
-      return;
     }
 
     window.location.href = `mailto:${GROUP.email}?subject=${encodeURIComponent(
@@ -111,6 +129,22 @@ export default function ContactForm({
       onSubmit={handleSubmit}
     >
       <input type="hidden" name="business" value={recipient} />
+      <input
+        type="text"
+        name="company_url"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        value={values.company_url}
+        onChange={update}
+        style={{
+          position: "absolute",
+          left: "-9999px",
+          width: "1px",
+          height: "1px",
+          opacity: 0,
+        }}
+      />
       <div className="contact-form__body">
         <div className="contact-form__grid">
           <label className="field">

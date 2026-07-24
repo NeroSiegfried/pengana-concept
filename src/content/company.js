@@ -23,10 +23,13 @@ export const GROUP = {
   email: "enquiries@penganaconcept.com",
 };
 
-// Where the contact form delivers. Leave null to compose an email in the
-// visitor's mail client (works with no backend); set to a POST endpoint
-// (Formspree, Netlify Forms, an API route…) to capture submissions directly.
-export const FORM_ENDPOINT = null;
+// Where the contact form delivers. Defaults to the built-in serverless
+// endpoint (api/enquiry.js), which emails each enquiry to the right business
+// inbox via Resend. Until RESEND_API_KEY is configured in Vercel the endpoint
+// returns 5xx and the form transparently falls back to the visitor's mail
+// client, so this is safe to ship before the backend is set up. Per-business
+// VITE_*_FORM_ENDPOINT env vars still override it.
+export const FORM_ENDPOINT = "/api/enquiry";
 
 export const GROUP_LEADERSHIP = [
   {
