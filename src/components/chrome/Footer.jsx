@@ -1,27 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { BUSINESSES } from "../../content/businesses.js";
 import {
   GLOBAL_NAVIGATION,
   GROUP,
+  siteFromPath,
   telephoneHref,
 } from "../../content/company.js";
 import Wordmark from "../ui/Wordmark.jsx";
 
 export default function Footer() {
-  return (
-    <footer className="site-footer" data-site="concept">
-      <div className="site-footer__lead">
-        <p className="eyebrow eyebrow--light">Start a conversation</p>
-        <h2>Which part of Pengana can help?</h2>
-        <Link className="site-footer__contact" to="/contact">
-          Contact the group <span aria-hidden="true">↗</span>
-        </Link>
-      </div>
+  const { pathname } = useLocation();
+  const site = siteFromPath(pathname);
 
+  return (
+    <footer className="site-footer" data-site={site}>
       <div className="site-footer__grid">
         <div className="site-footer__identity">
           <Wordmark inverted />
           <p>{GROUP.descriptor}</p>
+          <Link className="site-footer__cta" to="/contact">
+            Start a conversation <span aria-hidden="true">↗</span>
+          </Link>
         </div>
 
         <nav className="site-footer__nav" aria-label="Footer navigation">

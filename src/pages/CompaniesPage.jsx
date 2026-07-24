@@ -11,19 +11,19 @@ import { IMAGES } from "../content/images.js";
 const ENTRIES = [
   {
     business: BUSINESSES.properties,
-    image: IMAGES.propertiesExterior,
+    image: IMAGES.properties.hero,
     detail:
       "Development, sales, leasing and lettings, property management, and short-let hospitality from Jos.",
   },
   {
     business: BUSINESSES.tishino,
-    image: IMAGES.tishinoFields,
+    image: IMAGES.tishino.hero,
     detail:
       "Rice, beans and maize are the present crop focus, with livestock and poultry identified as growth areas.",
   },
   {
     business: BUSINESSES.sunab,
-    image: IMAGES.sunabNetwork,
+    image: IMAGES.sunab.hero,
     detail:
       "Carrier services under a separate board and brand, with more information on Sunab’s own website.",
   },

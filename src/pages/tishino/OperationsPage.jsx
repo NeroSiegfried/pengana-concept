@@ -2,15 +2,11 @@ import {
   ContactBand,
   ImageStatement,
   IntroSection,
-  NumberedGrid,
   TypeHero,
 } from "../../components/blocks/EditorialBlocks.jsx";
 import BusinessPageFrame from "../../components/chrome/BusinessPageFrame.jsx";
 import Reveal from "../../components/ui/Reveal.jsx";
-import { BUSINESSES } from "../../content/businesses.js";
 import { IMAGES } from "../../content/images.js";
-
-const TISHINO = BUSINESSES.tishino;
 
 export default function OperationsPage() {
   return (
@@ -31,17 +27,13 @@ export default function OperationsPage() {
       <IntroSection
         eyebrow="Current focus"
         title="Cultivation of staple crops."
-        text="The current business story centres on rice, beans and maize. Claims about farm size, harvest volumes, processing, storage or distribution have been left out until they can be verified."
+        text="Today the work centres on growing staple crops well. Claims about farm size, harvest volumes, processing, storage or distribution are left out until they can be verified — the produce page names the specific crops in focus."
         tone="natural"
       />
 
-      <section className="produce-section produce-section--flush">
-        <NumberedGrid items={TISHINO.produce} columns={3} />
-      </section>
-
       <ImageStatement
-        image={IMAGES.tishinoFields}
-        imageAlt="Conceptual landscape of cultivated fields"
+        image={IMAGES.tishino.operations}
+        imageAlt="Farmland and field work"
         eyebrow="Current direction"
         title="Crops first."
         text="A focused starting point for a business working in staple agriculture."

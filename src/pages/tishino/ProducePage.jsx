@@ -1,7 +1,6 @@
 import {
   ContactBand,
   ImageStatement,
-  NumberedGrid,
   TypeHero,
 } from "../../components/blocks/EditorialBlocks.jsx";
 import BusinessPageFrame from "../../components/chrome/BusinessPageFrame.jsx";
@@ -10,6 +9,11 @@ import { BUSINESSES } from "../../content/businesses.js";
 import { IMAGES } from "../../content/images.js";
 
 const TISHINO = BUSINESSES.tishino;
+const PRODUCE_IMAGES = {
+  Rice: IMAGES.tishino.rice,
+  Beans: IMAGES.tishino.beans,
+  Maize: IMAGES.tishino.maize,
+};
 
 export default function ProducePage() {
   return (
@@ -19,27 +23,40 @@ export default function ProducePage() {
         index="02 / Produce"
         title={
           <>
-            Rice. Beans.
+            The staples
             <br />
-            Maize.
+            we grow.
           </>
         }
-        text="The three staple crops named in Tishino Ventures’ current business focus."
+        text="Rice, beans and maize are among the everyday crops in focus today — grown for Nigerian homes and markets."
       />
 
       <section className="produce-section produce-section--feature">
-        <NumberedGrid items={TISHINO.produce} columns={3} />
+        <div className="produce-trio">
+          {TISHINO.produce.map((crop, index) => (
+            <Reveal className="produce-trio__item" delay={(index % 3) + 1} key={crop.title}>
+              <div className="produce-trio__media">
+                <img src={PRODUCE_IMAGES[crop.title]} alt={`${crop.title} crop`} loading="lazy" />
+                <span className="produce-trio__num">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <h3>{crop.title}</h3>
+              <p>{crop.text}</p>
+            </Reveal>
+          ))}
+        </div>
       </section>
 
-      <Reveal as="section" className="crop-wordmark" aria-label="Crop focus">
-        <span>Rice</span>
-        <span>Beans</span>
-        <span>Maize</span>
+      <Reveal as="section" className="crop-wordmark" aria-label="Rooted in Nigeria">
+        <span>Rooted</span>
+        <span>in</span>
+        <span>Nigeria</span>
       </Reveal>
 
       <ImageStatement
-        image={IMAGES.tishinoFields}
-        imageAlt="Conceptual landscape of cultivated fields"
+        image={IMAGES.tishino.statement}
+        imageAlt="Cultivated fields in green tones"
         eyebrow="Availability & supply"
         title="Discuss the current position directly."
         text="Crop volumes, timing and arrangements are intentionally not published without confirmed operational data."

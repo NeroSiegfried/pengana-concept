@@ -14,6 +14,7 @@ export const BUSINESSES = {
         "Tudun Wada, Jos",
         "Nigeria",
       ],
+      coords: { lat: 9.9098, lng: 8.8859, zoom: 14, area: "Tudun Wada, Jos" },
     },
     services: [
       {
@@ -45,7 +46,9 @@ export const BUSINESSES = {
     route: "/tishino",
     location: "Abuja, Nigeria",
     summary:
-      "An agriculture business focused on staple Nigerian crops, with livestock and poultry identified as areas for growth.",
+      "An agriculture business cultivating the staple crops Nigerian households rely on — rice, beans and maize among them — with livestock and poultry identified as areas for growth.",
+    focus:
+      "Tishino works in staple agriculture: the everyday crops that feed Nigerian homes and markets. Rice, beans and maize are among the staples it grows today.",
     office: {
       label: "Abuja office",
       address: [
@@ -53,19 +56,20 @@ export const BUSINESSES = {
         "Dakibiyu District, Abuja",
         "Nigeria",
       ],
+      coords: { lat: 9.0742, lng: 7.4321, zoom: 14, area: "Dakibiyu District, Abuja" },
     },
     produce: [
       {
         title: "Rice",
-        text: "One of Tishino Ventures’ core staple-crop interests.",
+        text: "A staple grain grown for households and markets across the region.",
       },
       {
         title: "Beans",
-        text: "A core Nigerian staple within the company’s agricultural focus.",
+        text: "A protein-rich legume at the centre of everyday Nigerian meals.",
       },
       {
         title: "Maize",
-        text: "Maize, or corn, forms the third named pillar of the crop portfolio.",
+        text: "A versatile cereal used for food, animal feed and further processing.",
       },
     ],
     growth: ["Livestock", "Poultry"],
@@ -77,7 +81,9 @@ export const BUSINESSES = {
     route: "/sunab",
     location: "Abuja, Nigeria",
     summary:
-      "A telecommunications carrier-services company with its own board, brand and website.",
+      "The group's telecommunications company, providing carrier and interconnect services that help mobile network operators in Nigeria and beyond extend their reach.",
+    description:
+      "Sunab Telecoms Services operates enterprise-grade carrier and interconnect infrastructure for mobile network operators. It runs under its own board and brand, with its full service catalogue, network detail and contact routes maintained on its dedicated website.",
     office: {
       label: "Abuja office",
       address: [
@@ -85,7 +91,19 @@ export const BUSINESSES = {
         "KingsPark Estate, Kukwaba District",
         "Abuja, Nigeria",
       ],
+      coords: { lat: 9.0797, lng: 7.4288, zoom: 14, area: "Kukwaba District, Abuja" },
     },
+    // Service catalogue as described in the group brief; confirm with Sunab before launch.
+    services: [
+      "Interconnection",
+      "Carrier services",
+      "Traffic management",
+      "Link optimization",
+      "Interactive voice response",
+      "Voice broadcast",
+      "Collocation",
+      "Call query",
+    ],
     externalUrl: "https://sunabtelecomservices.com",
   },
 };

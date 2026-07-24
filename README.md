@@ -47,9 +47,9 @@ public/
   images/                semantic, project-ready concept imagery
 src/
   components/
-    blocks/              reusable editorial sections
-    chrome/              global and subsidiary navigation, footer, page shells
-    ui/                  links, wordmark, viewport reveal
+    blocks/              reusable editorial sections (hero, split-story, board…)
+    chrome/              header + unified menu, business context strip, footer
+    ui/                  links, wordmark, viewport reveal, interactive office map
   content/
     company.js           group facts, leadership, phones and navigation
     businesses.js        one verified model for the three businesses
@@ -65,7 +65,9 @@ src/
 ## Design and content notes
 
 - [DESIGN.md](./DESIGN.md) defines the shared visual language, themes,
-  responsiveness and interaction rules.
+  navigation, responsiveness and interaction rules.
+- [images.md](./images.md) lists every image slot with a description and size —
+  overwrite the placeholder at each path with real photography, no renaming.
 - [CONTENT-NOTES.md](./CONTENT-NOTES.md) records what was removed and what needs
   confirmation before launch.
 - `pengana-relume-brief.md` is retained as the supplied content source. It is a
@@ -74,7 +76,10 @@ src/
 
 ## Imagery
 
-The site uses a small set of art-directed concept images to establish the
-layout. They are named by purpose instead of being reused under opaque export
-identifiers. Replace them with authenticated company photography before a
-public launch; the semantic paths make that swap straightforward.
+The site is image-led. Every `<img>` points at a purpose-named placeholder under
+`public/images/` (art-directed crops of the concept photography, tinted per
+business so the layout reads as finished today). To use real photography,
+**overwrite the file in place** — the paths never change and nothing needs
+renaming. [images.md](./images.md) documents each slot's purpose, orientation and
+size. Board portraits are display-serif monograms until approved photos replace
+them. Maps use Leaflet with a keyless CARTO basemap.

@@ -33,8 +33,8 @@ export default function PropertyServicesPage() {
       </section>
 
       <ImageStatement
-        image={IMAGES.propertiesExterior}
-        imageAlt="Conceptual image of contemporary residential architecture"
+        image={IMAGES.properties.development}
+        imageAlt="Building and construction in progress"
         eyebrow="Property development"
         title="From an idea for property to a conversation in Jos."
         text="For development or property opportunities, contact the Pengana Properties office directly."

@@ -1,12 +1,38 @@
+import ContactForm from "../components/blocks/ContactForm.jsx";
 import {
   AddressBlock,
   TypeHero,
 } from "../components/blocks/EditorialBlocks.jsx";
 import PageFrame from "../components/chrome/PageFrame.jsx";
 import ActionLink from "../components/ui/ActionLink.jsx";
+import OfficeMap from "../components/ui/OfficeMap.jsx";
 import Reveal from "../components/ui/Reveal.jsx";
 import { BUSINESSES } from "../content/businesses.js";
 import { GROUP, telephoneHref } from "../content/company.js";
+
+const LOCATIONS = [
+  {
+    site: "concept",
+    eyebrow: "Group HQ · Tishino Ventures",
+    name: "Pengana Concept Limited",
+    office: GROUP.office,
+    link: { to: "/tishino/contact", label: "Agriculture enquiries" },
+  },
+  {
+    site: "properties",
+    eyebrow: "Property & hospitality",
+    name: BUSINESSES.properties.name,
+    office: BUSINESSES.properties.office,
+    link: { to: "/properties/contact", label: "Property enquiries" },
+  },
+  {
+    site: "sunab",
+    eyebrow: "Telecommunications",
+    name: BUSINESSES.sunab.name,
+    office: BUSINESSES.sunab.office,
+    link: { to: "/sunab", label: "Continue to Sunab" },
+  },
+];
 
 export default function ContactPage() {
   return (
@@ -21,7 +47,7 @@ export default function ContactPage() {
             right conversation.
           </>
         }
-        text="Use the shared telephone lines for Pengana Concept, Pengana Properties and Tishino Ventures, or choose a business below."
+        text="Use the shared telephone lines for Pengana Concept, Pengana Properties and Tishino Ventures, or choose an office below."
       />
 
       <section className="contact-directory">
@@ -42,43 +68,42 @@ export default function ContactPage() {
         </Reveal>
       </section>
 
-      <section className="business-contact-grid">
-        <Reveal className="business-contact-card" data-site="properties">
-          <p className="eyebrow">Property & hospitality</p>
-          <h2>{BUSINESSES.properties.name}</h2>
-          <AddressBlock
-            label={BUSINESSES.properties.office.label}
-            address={BUSINESSES.properties.office.address}
-          />
-          <ActionLink to="/properties/contact" variant="line">
-            Property enquiries
-          </ActionLink>
+      <section className="locations">
+        <Reveal className="locations__head">
+          <p className="eyebrow">Our locations</p>
+          <h2>Three offices, two cities.</h2>
         </Reveal>
-
-        <Reveal className="business-contact-card" data-site="tishino">
-          <p className="eyebrow">Agriculture</p>
-          <h2>{BUSINESSES.tishino.name}</h2>
-          <AddressBlock
-            label={BUSINESSES.tishino.office.label}
-            address={BUSINESSES.tishino.office.address}
-          />
-          <ActionLink to="/tishino/contact" variant="line">
-            Agriculture enquiries
-          </ActionLink>
-        </Reveal>
-
-        <Reveal className="business-contact-card" data-site="concept">
-          <p className="eyebrow">Telecommunications</p>
-          <h2>{BUSINESSES.sunab.name}</h2>
-          <AddressBlock
-            label={BUSINESSES.sunab.office.label}
-            address={BUSINESSES.sunab.office.address}
-          />
-          <ActionLink to="/sunab" variant="line">
-            Continue to Sunab
-          </ActionLink>
-        </Reveal>
+        <div className="locations__grid">
+          {LOCATIONS.map((location) => (
+            <Reveal className="location-card" data-site={location.site} key={location.name}>
+              <OfficeMap
+                coords={location.office.coords}
+                label={location.name}
+                business={location.site}
+              />
+              <div className="location-card__body">
+                <p className="eyebrow">{location.eyebrow}</p>
+                <h3>{location.name}</h3>
+                <address>
+                  {location.office.address.map((line) => (
+                    <span key={line}>{line}</span>
+                  ))}
+                </address>
+                <ActionLink to={location.link.to} variant="line">
+                  {location.link.label}
+                </ActionLink>
+              </div>
+            </Reveal>
+          ))}
+        </div>
       </section>
+
+      <ContactForm
+        eyebrow="Send a message"
+        title="Or write to us directly."
+        defaultBusiness="General enquiry"
+        business="concept"
+      />
     </PageFrame>
   );
 }

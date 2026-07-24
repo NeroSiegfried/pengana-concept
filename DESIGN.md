@@ -58,33 +58,67 @@ tokens and imagery shift:
 | Pengana Concept | `#101B26` | `#456079` | `#DFE7ED` | corporate, quiet |
 | Pengana Properties | `#281B15` | `#9A6848` | `#EADFD4` | warm, spatial |
 | Tishino Ventures | `#1C2417` | `#617149` | `#E3E4D3` | natural, grounded |
-| Sunab handoff | own deep blue | — | — | separate brand destination |
+| Sunab (internal) | `#0B1230` | `#3F4FB0` | `#D9DEF2` | telecoms, deep blue |
 
 The `data-site` attribute changes only the semantic tokens. It does not fork the
-component system.
+component system. The footer and closing CTAs read `data-site` from the current
+route, so the whole page — chrome included — resolves to one tone. The `/sunab`
+page itself stays in the group navy per brief; its blue appears only as the
+handoff accent.
 
 ## Shape language
 
-Rectangles remain the default. One asymmetric device is used at a time:
+Two shape families, applied on purpose rather than everywhere:
 
-- one clipped lower corner;
-- one oversized corner radius;
-- an unequal image grid;
-- a stepped or angled companion panel.
+- **Actions** keep the pill where they sit on media and heroes; utility controls
+  use a measured rounded rectangle (`--radius-s`), and in-copy actions are an
+  underlined line-link. The pill is not the default for everything.
+- **Surfaces** — photographic cards, split-story media, portraits, maps — carry
+  a measured radius (`--radius-m`). Structural ruled grids stay crisp.
 
-This takes the non-square energy of Furnexa and architectural references without
-turning every card into a different novelty.
+One asymmetric device is used at a time (a single chamfered corner, an unequal
+image grid, a stepped panel) for the non-square energy of Furnexa. **The clip
+always lands on an image corner, never where copy sits** — the earlier Tishino
+card cut its own text; the chamfer now sits upper-left, clear of the label.
+
+## Imagery
+
+The site is image-led, not a brochure: full-bleed statements, split-story bands,
+a produce gallery, portrait board tiles and live maps. Every `<img>` points at a
+stable placeholder in `public/images/` documented in [images.md](./images.md);
+overwrite the file in place with real photography — no code or path changes.
+Board portraits are display-serif monograms until approved photos replace them.
+
+## Maps
+
+Contact and office sections embed a live, interactive map per office (Leaflet +
+CARTO basemap, no API key). Tiles are toned to the paper; the marker takes the
+business accent; wheel-zoom stays off until the map is focused so it never
+hijacks scroll. Coordinates are district-level pending confirmation of exact
+plots.
 
 ## Navigation
 
-- Global header: 72px desktop, 64px compact.
-- Transparent over selected heroes; frosted and solid after scrolling.
-- Desktop business menu gives all three companies immediate access.
-- Below 960px, navigation becomes a working full-screen editorial drawer with
-  scroll lock and large ruled links.
-- Properties and Tishino have a separate 52/48px sticky local navigation. It
-  remains horizontally scrollable on compact screens rather than squeezing or
-  wrapping.
+The three businesses are reached through one system rather than a header menu
+plus a competing per-business tab bar.
+
+- Global header: 72px desktop, 64px compact. Transparent over selected heroes;
+  frosted and solid after scrolling. The frost sits on a pseudo-element so the
+  header never becomes the containing block for its own panels (a mega-panel or
+  full-screen menu that would otherwise clip when the header frosts on scroll).
+- **Businesses mega-panel.** The header's "Businesses" control opens one
+  full-width panel showing the three businesses with *every* sub-page, each
+  column in its own accent — plus an "All businesses" link. It does **not**
+  repeat About/Contact (those stay as their own header links). Opens on hover or
+  click.
+- **Context row, part of the header.** On a business page the header gains a
+  second row that shares its colour and frost: `Pengana Group / Business` on the
+  left and that mini-site's page links on the right, the active one underlined in
+  the business accent. It is the same navbar, not a separate strip.
+- Below 960px, the menu is a full-screen editorial drawer (large ruled group
+  links, then each business with its sub-pages); the context row's page links
+  scroll horizontally.
+- Header accent, the context row and the footer all shift tone with the section.
 
 ## Responsive behavior
 
@@ -101,9 +135,12 @@ turning every card into a different novelty.
 
 Motion is restrained and functional:
 
-- 1.04 image scale on image-led card hover;
-- arrow rotation or spacing change on actionable elements;
-- one entrance treatment using `IntersectionObserver`;
+- a short page-enter fade/rise on every route, and a slow settle-zoom on hero
+  imagery;
+- the home showcase expands the hovered panel and reveals its summary while the
+  others shrink;
+- image scale on image-led card hover; arrow travel on actionable elements;
+- section entrances via `IntersectionObserver`;
 - transparent-to-frosted navigation transition;
 - no long loader, autoplay carousel, scroll hijack or decorative cursor.
 

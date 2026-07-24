@@ -2,8 +2,10 @@ import {
   AddressBlock,
   TypeHero,
 } from "../../components/blocks/EditorialBlocks.jsx";
+import ContactForm from "../../components/blocks/ContactForm.jsx";
 import BusinessPageFrame from "../../components/chrome/BusinessPageFrame.jsx";
 import ActionLink from "../../components/ui/ActionLink.jsx";
+import OfficeMap from "../../components/ui/OfficeMap.jsx";
 import Reveal from "../../components/ui/Reveal.jsx";
 import { BUSINESSES } from "../../content/businesses.js";
 import { GROUP, telephoneHref } from "../../content/company.js";
@@ -33,6 +35,12 @@ export default function PropertiesContact() {
             label={PROPERTIES.office.label}
             address={PROPERTIES.office.address}
           />
+          <OfficeMap
+            coords={PROPERTIES.office.coords}
+            label={PROPERTIES.name}
+            business="properties"
+            className="entity-contact__map"
+          />
         </Reveal>
         <Reveal className="entity-contact__phones">
           <p className="eyebrow">Shared telephone lines</p>
@@ -61,6 +69,13 @@ export default function PropertiesContact() {
           Group contact directory
         </ActionLink>
       </Reveal>
+
+      <ContactForm
+        eyebrow="Property enquiry"
+        title="Send the Jos team a message."
+        defaultBusiness="Pengana Properties"
+        business="properties"
+      />
     </BusinessPageFrame>
   );
 }

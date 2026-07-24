@@ -2,8 +2,10 @@ import {
   AddressBlock,
   TypeHero,
 } from "../../components/blocks/EditorialBlocks.jsx";
+import ContactForm from "../../components/blocks/ContactForm.jsx";
 import BusinessPageFrame from "../../components/chrome/BusinessPageFrame.jsx";
 import ActionLink from "../../components/ui/ActionLink.jsx";
+import OfficeMap from "../../components/ui/OfficeMap.jsx";
 import Reveal from "../../components/ui/Reveal.jsx";
 import { BUSINESSES } from "../../content/businesses.js";
 import { GROUP, telephoneHref } from "../../content/company.js";
@@ -33,6 +35,12 @@ export default function TishinoContact() {
             label={TISHINO.office.label}
             address={TISHINO.office.address}
           />
+          <OfficeMap
+            coords={TISHINO.office.coords}
+            label={TISHINO.name}
+            business="tishino"
+            className="entity-contact__map"
+          />
         </Reveal>
         <Reveal className="entity-contact__phones">
           <p className="eyebrow">Shared telephone lines</p>
@@ -57,6 +65,13 @@ export default function TishinoContact() {
           Group contact directory
         </ActionLink>
       </Reveal>
+
+      <ContactForm
+        eyebrow="Agriculture enquiry"
+        title="Send Tishino Ventures a message."
+        defaultBusiness="Tishino Ventures"
+        business="tishino"
+      />
     </BusinessPageFrame>
   );
 }

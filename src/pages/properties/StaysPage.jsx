@@ -15,8 +15,8 @@ export default function StaysPage() {
   return (
     <BusinessPageFrame business="properties" title="Stays">
       <BusinessHero
-        image={IMAGES.propertiesStay}
-        imageAlt="Conceptual close-up of a warm furnished interior"
+        image={IMAGES.properties.stay}
+        imageAlt="Warm, furnished short-let interior"
         eyebrow="Pengana Properties · Hospitality"
         title="A place to stay in Jos."
         text={PROPERTIES.stays.text}
@@ -54,8 +54,8 @@ export default function StaysPage() {
       </Reveal>
 
       <ImageStatement
-        image={IMAGES.propertiesDetail}
-        imageAlt="Conceptual detail of contemporary timber architecture"
+        image={IMAGES.properties.detail}
+        imageAlt="Interior material detail"
         eyebrow="Availability"
         title="Ask what is available for your dates."
         text="Use the shared Pengana telephone lines and the team can discuss the current offer."

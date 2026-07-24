@@ -1,10 +1,18 @@
 :root {
   --unit: 8px;
   --header-height: 72px;
-  --business-nav-height: 52px;
+  --context-height: 48px;
   --gutter: clamp(16px, 2.5vw, 40px);
   --section-space: clamp(96px, 11vw, 176px);
   --content-max: 1680px;
+
+  /* Shape system: pills stay for actions on media; surfaces get a measured
+     radius; one asymmetric clip is used at a time for accent. */
+  --radius-s: 10px;
+  --radius-m: 16px;
+  --radius-l: 26px;
+  --radius-pill: 999px;
+  --chamfer: clamp(40px, 6vw, 72px);
 
   --paper: #f4f1e9;
   --paper-bright: #fbfaf7;
@@ -24,10 +32,17 @@
   --tishino-accent: #617149;
   --tishino-deep: #1c2417;
   --tishino-pale: #e3e4d3;
+  --tishino-gold: #c1a153;
+
+  --sunab-deep: #0b1230;
+  --sunab-accent: #3f4fb0;
+  --sunab-pale: #d9def2;
 
   --accent: var(--group-accent);
   --deep: var(--group-deep);
   --pale: var(--group-pale);
+  /* Optional per-business secondary accent; defaults to the primary accent. */
+  --gold: var(--group-accent);
 
   --font-display: "Pengana Display", "Times New Roman", serif;
   --font-ui:
@@ -35,7 +50,9 @@
     sans-serif;
 
   --shadow-nav: 0 12px 40px rgba(15, 20, 25, 0.1);
+  --shadow-card: 0 24px 60px -32px rgba(15, 20, 25, 0.45);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.5, 1);
 }
 
 [data-site="concept"] {
@@ -48,17 +65,26 @@
   --accent: var(--properties-accent);
   --deep: var(--properties-deep);
   --pale: var(--properties-pale);
+  --gold: #b98a4e;
 }
 
 [data-site="tishino"] {
   --accent: var(--tishino-accent);
   --deep: var(--tishino-deep);
   --pale: var(--tishino-pale);
+  --gold: var(--tishino-gold);
+}
+
+[data-site="sunab"] {
+  --accent: var(--sunab-accent);
+  --deep: var(--sunab-deep);
+  --pale: var(--sunab-pale);
+  --gold: #6f7fd6;
 }
 
 @media (max-width: 959px) {
   :root {
     --header-height: 64px;
-    --business-nav-height: 48px;
+    --context-height: 46px;
   }
 }

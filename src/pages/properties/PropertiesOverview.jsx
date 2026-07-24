@@ -21,8 +21,8 @@ export default function PropertiesOverview() {
       className="properties-page"
     >
       <BusinessHero
-        image={IMAGES.propertiesExterior}
-        imageAlt="Conceptual image of contemporary residential architecture"
+        image={IMAGES.properties.hero}
+        imageAlt="Contemporary residential building exterior in warm daylight"
         eyebrow="A Pengana Concept company · Jos"
         title="Property, handled as a whole."
         text={PROPERTIES.summary}
@@ -46,7 +46,7 @@ export default function PropertiesOverview() {
 
       <section className="focus-pair">
         <Reveal as="article" className="focus-card focus-card--real-estate">
-          <img src={IMAGES.propertiesDetail} alt="" />
+          <img src={IMAGES.properties.realEstate} alt="" />
           <div className="focus-card__copy">
             <span>01</span>
             <p className="eyebrow eyebrow--light">Real estate</p>
@@ -62,7 +62,7 @@ export default function PropertiesOverview() {
         </Reveal>
 
         <Reveal as="article" className="focus-card focus-card--stays">
-          <img src={IMAGES.propertiesStay} alt="" />
+          <img src={IMAGES.properties.stay} alt="" />
           <div className="focus-card__copy">
             <span>02</span>
             <p className="eyebrow eyebrow--light">Hospitality</p>
@@ -87,8 +87,8 @@ export default function PropertiesOverview() {
       </section>
 
       <ImageStatement
-        image={IMAGES.groupHero}
-        imageAlt="Abstract sunlit architectural geometry"
+        image={IMAGES.properties.statement}
+        imageAlt="Contemporary building against open sky"
         eyebrow="Jos, Plateau State"
         title="A local team for property and stays."
         text="Pengana Properties operates from Tudun Wada in Jos."

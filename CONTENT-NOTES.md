@@ -47,7 +47,10 @@ business before launch.
 4. Whether the two Bitrus name forms are intentionally different.
 5. Official brand assets and wordmark.
 6. Real photography for offices, projects, accommodation, fields and telecoms.
-7. A verified group email and any business-specific contact endpoints.
+7. A verified group email (the contact form uses `enquiries@penganaconcept.com`
+   as a placeholder and, with no backend, composes an email in the visitor's mail
+   client). Set `FORM_ENDPOINT` in `src/content/company.js` to capture
+   submissions server-side (Formspree, Netlify Forms, an API route…).
 8. Real projects/listings before restoring Portfolio.
 9. Real farm/produce photography before restoring Gallery.
 10. Real roles and a working application route before restoring Careers.

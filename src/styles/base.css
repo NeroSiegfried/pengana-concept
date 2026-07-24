@@ -119,6 +119,18 @@ p {
   position: relative;
   min-height: 70vh;
   background: var(--paper-bright);
+  animation: page-enter 560ms var(--ease-out) both;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .page:focus {
@@ -141,71 +153,132 @@ p {
 .action-row {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--unit);
+  gap: 12px;
+  align-items: center;
 }
 
+/* One button system, applied with intent:
+   solid/light/glass  → pill actions, best over media and heroes;
+   ghost              → utility rounded-rectangle (context bar, controls);
+   line               → editorial inline link, the workhorse inside copy. */
 .action {
+  --action-bg: var(--accent);
+  --action-fg: #fff;
+  position: relative;
   display: inline-flex;
-  min-height: 48px;
+  min-height: 52px;
   align-items: center;
-  justify-content: space-between;
-  gap: calc(var(--unit) * 4);
-  padding: 12px 18px;
+  gap: 14px;
+  padding: 14px 22px;
+  color: var(--action-fg);
   border: 1px solid transparent;
-  border-radius: 999px;
-  font-size: 0.78rem;
+  border-radius: var(--radius-pill);
+  background: var(--action-bg);
+  font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.01em;
   line-height: 1;
+  white-space: nowrap;
   transition:
-    gap 350ms var(--ease-out),
-    background-color 250ms ease,
-    border-color 250ms ease,
-    color 250ms ease;
+    background-color 260ms ease,
+    border-color 260ms ease,
+    color 260ms ease,
+    box-shadow 260ms ease,
+    transform 420ms var(--ease-out);
 }
 
 .action:hover {
-  gap: calc(var(--unit) * 5);
+  transform: translateY(-2px);
 }
 
-.action--solid {
-  color: white;
-  background: var(--accent);
+.action:active {
+  transform: translateY(0);
+}
+
+.action__arrow {
+  font-size: 1.05rem;
+  transition: transform 440ms var(--ease-spring);
+}
+
+.action:hover .action__arrow {
+  transform: translate(4px, -4px);
 }
 
 .action--solid:hover {
-  background: var(--deep);
+  --action-bg: var(--deep);
+  box-shadow: var(--shadow-card);
 }
 
 .action--light {
-  color: var(--ink);
-  background: white;
+  --action-bg: #fff;
+  --action-fg: var(--ink);
 }
 
 .action--light:hover {
-  background: var(--pale);
+  --action-bg: var(--pale);
+  box-shadow: var(--shadow-card);
 }
 
 .action--glass {
-  color: white;
+  --action-fg: #fff;
   border-color: var(--light-line);
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(12px);
 }
 
 .action--glass:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.action--ghost {
+  --action-fg: var(--ink);
+  min-height: 48px;
+  padding: 12px 18px;
+  border-color: var(--line);
+  border-radius: var(--radius-s);
+  background: transparent;
+}
+
+.action--ghost:hover {
+  --action-fg: var(--accent);
+  border-color: var(--accent);
 }
 
 .action--line {
   min-height: 40px;
-  padding-inline: 0;
-  border-bottom: 1px solid currentColor;
+  padding: 6px 0;
+  gap: 10px;
+  color: inherit;
+  border: 0;
   border-radius: 0;
+  background: none;
 }
 
-.action__arrow {
-  font-size: 1rem;
+.action--line:hover {
+  transform: none;
+}
+
+.action--line::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.45;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition:
+    transform 460ms var(--ease-out),
+    opacity 260ms ease;
+}
+
+.action--line:hover::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.action--line .action__arrow {
+  font-size: 0.95rem;
 }
 
 .reveal {

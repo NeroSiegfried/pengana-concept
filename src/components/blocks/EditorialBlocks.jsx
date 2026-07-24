@@ -176,6 +176,76 @@ export function ContactBand({
   );
 }
 
+export function SplitStory({
+  image,
+  imageAlt,
+  eyebrow,
+  title,
+  text,
+  action,
+  caption,
+  flip = false,
+  tone = "light",
+  clip = false,
+}) {
+  const paragraphs = Array.isArray(text) ? text : text ? [text] : [];
+  return (
+    <Reveal
+      as="section"
+      className={`split-story split-story--${tone} ${flip ? "is-flip" : ""}`}
+    >
+      <div className="split-story__inner">
+        <div className={`split-story__media ${clip ? "split-story__media--clip" : ""}`}>
+          <img src={image} alt={imageAlt} loading="lazy" />
+          {caption ? <span className="split-story__caption">{caption}</span> : null}
+        </div>
+        <div className="split-story__body">
+          <p className="eyebrow">{eyebrow}</p>
+          <h2>{title}</h2>
+          {paragraphs.map((paragraph, index) => (
+            <p key={index}>{paragraph}</p>
+          ))}
+          {action ? (
+            <ActionLink
+              to={action.to}
+              variant={action.variant || "line"}
+              external={action.external}
+            >
+              {action.label}
+            </ActionLink>
+          ) : null}
+        </div>
+      </div>
+    </Reveal>
+  );
+}
+
+export function BoardGrid({ eyebrow, title, intro, members }) {
+  return (
+    <section className="board">
+      <Reveal className="board__head">
+        <p className="eyebrow">{eyebrow}</p>
+        <h2>{title}</h2>
+        {intro ? <p>{intro}</p> : null}
+      </Reveal>
+      <div className="board__grid">
+        {members.map((member, index) => (
+          <Reveal className="board__member" delay={(index % 4) + 1} key={member.name}>
+            <div className="board__portrait">
+              <img src={member.portrait} alt={member.name} loading="lazy" />
+              <span className="board__index" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+            </div>
+            <h3>{member.name}</h3>
+            <p>{member.role}</p>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export function AddressBlock({ label, address, phones = [] }) {
   return (
     <div className="address-block">
