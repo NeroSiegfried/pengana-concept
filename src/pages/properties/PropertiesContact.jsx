@@ -4,6 +4,7 @@ import {
 } from "../../components/blocks/EditorialBlocks.jsx";
 import ContactForm from "../../components/blocks/ContactForm.jsx";
 import BusinessPageFrame from "../../components/chrome/BusinessPageFrame.jsx";
+import SmartImage from "../../components/ui/SmartImage.jsx";
 import { Arrow } from "../../components/ui/icons.jsx";
 import OfficeMap from "../../components/ui/OfficeMap.jsx";
 import Reveal from "../../components/ui/Reveal.jsx";
@@ -75,10 +76,10 @@ export default function PropertiesContact() {
         </div>
 
         <Reveal as="figure" className="contact-composer__media">
-          <img
+          <SmartImage
             src={IMAGES.properties.lifestyle}
             alt="A considered Pengana Properties interior in Jos"
-            loading="lazy"
+            sizes="(min-width: 900px) 45vw, 100vw"
           />
           <figcaption>Property and hospitality · Jos</figcaption>
         </Reveal>

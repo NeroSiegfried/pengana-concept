@@ -4,6 +4,7 @@ import {
 } from "../../components/blocks/EditorialBlocks.jsx";
 import ContactForm from "../../components/blocks/ContactForm.jsx";
 import BusinessPageFrame from "../../components/chrome/BusinessPageFrame.jsx";
+import SmartImage from "../../components/ui/SmartImage.jsx";
 import { Arrow } from "../../components/ui/icons.jsx";
 import OfficeMap from "../../components/ui/OfficeMap.jsx";
 import Reveal from "../../components/ui/Reveal.jsx";
@@ -75,10 +76,10 @@ export default function TishinoContact() {
         </div>
 
         <Reveal as="figure" className="contact-composer__media">
-          <img
+          <SmartImage
             src={IMAGES.tishino.agronomy}
             alt="An agronomist examining soil and diversified crop growth"
-            loading="lazy"
+            sizes="(min-width: 900px) 45vw, 100vw"
           />
           <figcaption>Agriculture in operation · Nigeria</figcaption>
         </Reveal>

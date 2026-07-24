@@ -6,6 +6,7 @@ import {
 } from "../components/blocks/EditorialBlocks.jsx";
 import ContactForm from "../components/blocks/ContactForm.jsx";
 import PageFrame from "../components/chrome/PageFrame.jsx";
+import SmartImage from "../components/ui/SmartImage.jsx";
 import { Arrow } from "../components/ui/icons.jsx";
 import OfficeMap from "../components/ui/OfficeMap.jsx";
 import Reveal from "../components/ui/Reveal.jsx";
@@ -78,10 +79,10 @@ export default function SunabPage() {
           </p>
         </Reveal>
         <Reveal className="sunab-network-story__lead">
-          <img
+          <SmartImage
             src={IMAGES.sunab.infrastructure}
             alt="Network engineer inspecting carrier infrastructure"
-            loading="lazy"
+            sizes="(min-width: 900px) 50vw, 100vw"
           />
         </Reveal>
       </section>
@@ -177,10 +178,10 @@ export default function SunabPage() {
         </div>
 
         <Reveal as="figure" className="contact-composer__media">
-          <img
+          <SmartImage
             src={IMAGES.sunab.networkOperations}
             alt="Engineers monitoring telecommunications network operations"
-            loading="lazy"
+            sizes="(min-width: 900px) 45vw, 100vw"
           />
           <figcaption>Network operations · Abuja</figcaption>
         </Reveal>

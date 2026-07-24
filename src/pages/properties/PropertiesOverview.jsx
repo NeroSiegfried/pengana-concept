@@ -7,6 +7,7 @@ import {
 } from "../../components/blocks/EditorialBlocks.jsx";
 import BusinessPageFrame from "../../components/chrome/BusinessPageFrame.jsx";
 import ActionLink from "../../components/ui/ActionLink.jsx";
+import SmartImage from "../../components/ui/SmartImage.jsx";
 import Reveal from "../../components/ui/Reveal.jsx";
 import { BUSINESSES } from "../../content/businesses.js";
 import { IMAGES } from "../../content/images.js";
@@ -46,7 +47,11 @@ export default function PropertiesOverview() {
 
       <section className="focus-pair">
         <Reveal as="article" className="focus-card focus-card--real-estate">
-          <img src={IMAGES.properties.realEstate} alt="" />
+          <SmartImage
+            src={IMAGES.properties.realEstate}
+            alt=""
+            sizes="(min-width: 900px) 50vw, 100vw"
+          />
           <div className="focus-card__copy">
             <span>01</span>
             <p className="eyebrow eyebrow--light">Real estate</p>
@@ -62,7 +67,11 @@ export default function PropertiesOverview() {
         </Reveal>
 
         <Reveal as="article" className="focus-card focus-card--stays">
-          <img src={IMAGES.properties.stay} alt="" />
+          <SmartImage
+            src={IMAGES.properties.stay}
+            alt=""
+            sizes="(min-width: 900px) 50vw, 100vw"
+          />
           <div className="focus-card__copy">
             <span>02</span>
             <p className="eyebrow eyebrow--light">Hospitality</p>

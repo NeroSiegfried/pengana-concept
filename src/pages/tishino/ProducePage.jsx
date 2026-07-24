@@ -5,6 +5,7 @@ import {
 } from "../../components/blocks/EditorialBlocks.jsx";
 import BusinessPageFrame from "../../components/chrome/BusinessPageFrame.jsx";
 import Reveal from "../../components/ui/Reveal.jsx";
+import SmartImage from "../../components/ui/SmartImage.jsx";
 import { BUSINESSES } from "../../content/businesses.js";
 import { IMAGES } from "../../content/images.js";
 
@@ -12,7 +13,7 @@ const TISHINO = BUSINESSES.tishino;
 const PRODUCE_IMAGES = [
   IMAGES.tishino.rice,
   IMAGES.tishino.beans,
-  IMAGES.tishino.produce,
+  IMAGES.tishino.tubers,
 ];
 // Mixed treatment and position so the trio doesn't read as a uniform row.
 // Top-left is left alone — it carries the index number.
@@ -39,7 +40,11 @@ export default function ProducePage() {
           {TISHINO.produce.map((category, index) => (
             <Reveal className="produce-trio__item" delay={(index % 3) + 1} key={category.title}>
               <div className={`produce-trio__media ${PRODUCE_CORNERS[index]}`}>
-                <img src={PRODUCE_IMAGES[index]} alt="" loading="lazy" />
+                <SmartImage
+                  src={PRODUCE_IMAGES[index]}
+                  alt=""
+                  sizes="(min-width: 900px) 30vw, 90vw"
+                />
                 <span className="produce-trio__num">
                   {String(index + 1).padStart(2, "0")}
                 </span>

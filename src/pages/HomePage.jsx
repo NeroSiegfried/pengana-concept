@@ -6,6 +6,7 @@ import {
 } from "../components/blocks/EditorialBlocks.jsx";
 import PageFrame from "../components/chrome/PageFrame.jsx";
 import ActionLink from "../components/ui/ActionLink.jsx";
+import SmartImage from "../components/ui/SmartImage.jsx";
 import { Arrow, Caret } from "../components/ui/icons.jsx";
 import Reveal from "../components/ui/Reveal.jsx";
 import { BUSINESSES } from "../content/businesses.js";
@@ -26,10 +27,12 @@ export default function HomePage() {
   return (
     <PageFrame site="concept" title={GROUP.name} className="home-page">
       <section className="home-hero">
-        <img
+        <SmartImage
           className="home-hero__image"
           src={IMAGES.group.hero}
           alt="Wide view of contemporary architecture at dusk"
+          eager
+          sizes="100vw"
         />
         <div className="home-hero__veil" />
         <Reveal className="home-hero__content">
@@ -90,7 +93,11 @@ export default function HomePage() {
               data-business={business.id}
               key={business.id}
             >
-              <img src={business.image} alt="" loading="lazy" />
+              <SmartImage
+                src={business.image}
+                alt=""
+                sizes="(min-width: 900px) 40vw, 100vw"
+              />
               <span className="acc-card__veil" />
               <span className="acc-card__index">0{index + 1}</span>
               <div className="acc-card__body">

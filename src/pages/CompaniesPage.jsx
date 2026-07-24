@@ -5,6 +5,7 @@ import {
 } from "../components/blocks/EditorialBlocks.jsx";
 import PageFrame from "../components/chrome/PageFrame.jsx";
 import ActionLink from "../components/ui/ActionLink.jsx";
+import SmartImage from "../components/ui/SmartImage.jsx";
 import Reveal from "../components/ui/Reveal.jsx";
 import { BUSINESSES } from "../content/businesses.js";
 import { IMAGES } from "../content/images.js";
@@ -153,10 +154,11 @@ export default function CompaniesPage() {
                     className={`company-index__image company-index__image--tile ${CORNERS[imageIndex]}`}
                     key={image.src}
                   >
-                    <img
+                    <SmartImage
                       src={image.src}
                       alt={image.alt}
-                      loading={imageIndex === 0 ? undefined : "lazy"}
+                      eager={imageIndex === 0}
+                      sizes="(min-width: 900px) 24vw, 50vw"
                     />
                     <figcaption className="company-index__caption">
                       <span>0{imageIndex + 1}</span>
@@ -167,7 +169,11 @@ export default function CompaniesPage() {
               </div>
 
               <figure className={`company-index__image company-index__image--panorama ${CORNERS[2]}`}>
-                <img src={images[2].src} alt={images[2].alt} loading="lazy" />
+                <SmartImage
+                  src={images[2].src}
+                  alt={images[2].alt}
+                  sizes="(min-width: 900px) 48vw, 100vw"
+                />
                 <figcaption className="company-index__caption">
                   <span>03</span>
                   <span>{images[2].caption}</span>
@@ -180,7 +186,11 @@ export default function CompaniesPage() {
                     className={`company-index__image company-index__image--tile ${CORNERS[imageIndex + 3]}`}
                     key={image.src}
                   >
-                    <img src={image.src} alt={image.alt} loading="lazy" />
+                    <SmartImage
+                      src={image.src}
+                      alt={image.alt}
+                      sizes="(min-width: 900px) 24vw, 50vw"
+                    />
                     <figcaption className="company-index__caption">
                       <span>0{imageIndex + 4}</span>
                       <span>{image.caption}</span>

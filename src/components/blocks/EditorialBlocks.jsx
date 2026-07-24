@@ -1,5 +1,6 @@
 import ActionLink from "../ui/ActionLink.jsx";
 import Reveal from "../ui/Reveal.jsx";
+import SmartImage from "../ui/SmartImage.jsx";
 
 export function BusinessHero({
   image,
@@ -13,10 +14,12 @@ export function BusinessHero({
 }) {
   return (
     <section className={`business-hero business-hero--${align}`}>
-      <img
+      <SmartImage
         className={`business-hero__image ${imageClassName}`.trim()}
         src={image}
         alt={imageAlt}
+        eager
+        sizes="100vw"
       />
       <div className="business-hero__veil" />
       <Reveal className="business-hero__content">
@@ -108,10 +111,12 @@ export function ImageStatement({
 }) {
   return (
     <section className="image-statement">
-      <img
+      <SmartImage
         className={`image-statement__image image-statement__image--${position}`}
         src={image}
         alt={imageAlt}
+        duotone
+        sizes="100vw"
       />
       <div className="image-statement__veil" />
       <Reveal className="image-statement__content">
@@ -187,6 +192,7 @@ export function SplitStory({
   flip = false,
   tone = "light",
   clip = false,
+  duotone = false,
 }) {
   const paragraphs = Array.isArray(text) ? text : text ? [text] : [];
   return (
@@ -196,7 +202,12 @@ export function SplitStory({
     >
       <div className="split-story__inner">
         <div className={`split-story__media ${clip ? "split-story__media--clip" : ""}`}>
-          <img src={image} alt={imageAlt} loading="lazy" />
+          <SmartImage
+            src={image}
+            alt={imageAlt}
+            duotone={duotone}
+            sizes="(min-width: 900px) 45vw, 100vw"
+          />
           {caption ? <span className="split-story__caption">{caption}</span> : null}
         </div>
         <div className="split-story__body">
@@ -232,7 +243,11 @@ export function BoardGrid({ eyebrow, title, intro, members }) {
         {members.map((member, index) => (
           <Reveal className="board__member" delay={(index % 4) + 1} key={member.name}>
             <div className="board__portrait">
-              <img src={member.portrait} alt={member.name} loading="lazy" />
+              <SmartImage
+                src={member.portrait}
+                alt={member.name}
+                sizes="(min-width: 900px) 22vw, 45vw"
+              />
               <span className="board__index" aria-hidden="true">
                 {String(index + 1).padStart(2, "0")}
               </span>

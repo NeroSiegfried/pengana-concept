@@ -34,6 +34,7 @@ export const IMAGES = {
     rootsSorting: "/images/tishino/roots-sorting.jpg",
     distribution: "/images/tishino/distribution.jpg",
     agronomy: "/images/tishino/agronomy.jpg",
+    tubers: "/images/tishino/tubers.jpg",
   },
   sunab: {
     hero: "/images/sunab/hero.jpg",

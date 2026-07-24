@@ -414,6 +414,20 @@
   background: var(--deep);
 }
 
+/* SmartImage — responsive <picture> with an inlined LQIP blur-up. The wrapper
+   is display:contents so the <img> lays out exactly as a bare <img> would; the
+   low-quality placeholder is painted as the image's own background and covered
+   by the sharp photo once it loads. */
+.smart-picture {
+  display: contents;
+}
+
+.smart-img {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .home-hero__image,
 .business-hero__image,
 .image-statement__image {
