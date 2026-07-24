@@ -57,13 +57,7 @@ export const IMG = {
     "lqip": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAADwAwCdASoYABAAPu1iqU2ppaOiMAgBMB2JZQDCgCHgEfa5Jy2B4+uAAP7wvU8DowWXKC/6zrGJ3WcLElPs+m9Vn5ujGu9ed4j90dhpuWy7qIHRBer9/XV6uY3aJPbYu7WgZwqqaiwAAA==",
     "webp": "/images/group/statement-640.webp 640w, /images/group/statement-1024.webp 1024w, /images/group/statement-1440.webp 1440w, /images/group/statement-2000.webp 2000w",
     "jpg": "/images/group/statement-640.jpg 640w, /images/group/statement-1024.jpg 1024w, /images/group/statement-1440.jpg 1440w, /images/group/statement-2000.jpg 2000w",
-    "fallback": "/images/group/statement-1024.jpg",
-    "duotone": {
-      "lqip": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAADQAwCdASoYABAAPu1iqU2ppaOiMAgBMB2JaQAAW+wSP8WBzs805wAA/vC9TwOjBZcoL/X1eaF7xmkHAydf3ifOgl2cQxRQO307OdPhRrDoBfExy7tXPoXSqug6FSAA",
-      "webp": "/images/group/statement-duotone-640.webp 640w, /images/group/statement-duotone-1024.webp 1024w, /images/group/statement-duotone-1440.webp 1440w, /images/group/statement-duotone-2000.webp 2000w",
-      "jpg": "/images/group/statement-duotone-640.jpg 640w, /images/group/statement-duotone-1024.jpg 1024w, /images/group/statement-duotone-1440.jpg 1440w, /images/group/statement-duotone-2000.jpg 2000w",
-      "fallback": "/images/group/statement-duotone-1024.jpg"
-    }
+    "fallback": "/images/group/statement-1024.jpg"
   },
   "/images/group/story.jpg": {
     "w": 5502,
@@ -159,13 +153,7 @@ export const IMG = {
     "lqip": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAABwBACdASoYABAAPu1iqU2ppaQiMAgBMB2JQBOmUI7gBTLkvz1xgk+hwjhVgAD+r20r12jrEh/4SustxL5N8Nb5WwnqWTZGFwe5YJHcbfoPRkXMAAA=",
     "webp": "/images/properties/statement-640.webp 640w, /images/properties/statement-1024.webp 1024w, /images/properties/statement-1440.webp 1440w, /images/properties/statement-2000.webp 2000w",
     "jpg": "/images/properties/statement-640.jpg 640w, /images/properties/statement-1024.jpg 1024w, /images/properties/statement-1440.jpg 1440w, /images/properties/statement-2000.jpg 2000w",
-    "fallback": "/images/properties/statement-1024.jpg",
-    "duotone": {
-      "lqip": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAAAQBACdASoYABAAPu1kqU2ppaQiMAgBMB2JaQAAUwzcLd85+dlBDCN8gAD+r5sSNyvDrukPCS6NpxBfYKyu1zsJ3wCiZF0AAAA=",
-      "webp": "/images/properties/statement-duotone-640.webp 640w, /images/properties/statement-duotone-1024.webp 1024w, /images/properties/statement-duotone-1440.webp 1440w, /images/properties/statement-duotone-2000.webp 2000w",
-      "jpg": "/images/properties/statement-duotone-640.jpg 640w, /images/properties/statement-duotone-1024.jpg 1024w, /images/properties/statement-duotone-1440.jpg 1440w, /images/properties/statement-duotone-2000.jpg 2000w",
-      "fallback": "/images/properties/statement-duotone-1024.jpg"
-    }
+    "fallback": "/images/properties/statement-1024.jpg"
   },
   "/images/properties/stay.jpg": {
     "w": 3899,
@@ -229,13 +217,7 @@ export const IMG = {
     "lqip": "data:image/webp;base64,UklGRrIAAABXRUJQVlA4IKYAAABwBACdASoYABAAPu1iqU2ppaOiMAgBMB2JbACdMoGv/gL9eB/HTpvzJ6KNgAD+3a/TGNiRp+mmT9CAew8ANQ2ZTnH+pFOiagccf4FQBypth1IDFum1tzJZoX5ePBWRscxFNp9GEO1unW6/RcrUqljgzmPE/nLC9T2NDM7z+diCqDUmyXAVreOq22GqaW2yHYDoLkW5l9sel2fIK3kOP3bMECvVAAAA",
     "webp": "/images/sunab/statement-640.webp 640w, /images/sunab/statement-1024.webp 1024w, /images/sunab/statement-1440.webp 1440w, /images/sunab/statement-2000.webp 2000w",
     "jpg": "/images/sunab/statement-640.jpg 640w, /images/sunab/statement-1024.jpg 1024w, /images/sunab/statement-1440.jpg 1440w, /images/sunab/statement-2000.jpg 2000w",
-    "fallback": "/images/sunab/statement-1024.jpg",
-    "duotone": {
-      "lqip": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAADQAwCdASoYABAAPu1iqU2ppaOiMAgBMB2JaQAAWpYcrxseJ1n70wAA/sHLZyMGHAJOv7eGSYSLRCSOa9JF0Bo9Xuta0VHewP6fPPyPGFi3NZiksx3uETSpdsvbns5jxPssBsfV1bYLXQ+haW/D/4Wn80QDOneJXY+XlTB67+mzX9+OCIAAAA==",
-      "webp": "/images/sunab/statement-duotone-640.webp 640w, /images/sunab/statement-duotone-1024.webp 1024w, /images/sunab/statement-duotone-1440.webp 1440w, /images/sunab/statement-duotone-2000.webp 2000w",
-      "jpg": "/images/sunab/statement-duotone-640.jpg 640w, /images/sunab/statement-duotone-1024.jpg 1024w, /images/sunab/statement-duotone-1440.jpg 1440w, /images/sunab/statement-duotone-2000.jpg 2000w",
-      "fallback": "/images/sunab/statement-duotone-1024.jpg"
-    }
+    "fallback": "/images/sunab/statement-1024.jpg"
   },
   "/images/tishino/agronomy.jpg": {
     "w": 6720,
@@ -323,13 +305,7 @@ export const IMG = {
     "lqip": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAACwBACdASoYABIAPu1ip02ppaOiMAgBMB2JQBadA9C8cLeDnJwx5WwXI4r+TcsAAMqjpuWa03MNkY0asMZMNimh+DuideveXi0sFNdEOOwetU4Jx8E3lbERI6fJwhTyAAA=",
     "webp": "/images/tishino/statement-640.webp 640w, /images/tishino/statement-1024.webp 1024w, /images/tishino/statement-1440.webp 1440w, /images/tishino/statement-2000.webp 2000w",
     "jpg": "/images/tishino/statement-640.jpg 640w, /images/tishino/statement-1024.jpg 1024w, /images/tishino/statement-1440.jpg 1440w, /images/tishino/statement-2000.jpg 2000w",
-    "fallback": "/images/tishino/statement-1024.jpg",
-    "duotone": {
-      "lqip": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAwBACdASoYABIAPuVepU2pJSOiMAwBIByJaQAAW9QE+EI/c8LCRR3oXAAAymyDfuMgzMwOeCgItqVzXVaA5cTcVh7RIo3hjQp8tJjiEDegAAAA",
-      "webp": "/images/tishino/statement-duotone-640.webp 640w, /images/tishino/statement-duotone-1024.webp 1024w, /images/tishino/statement-duotone-1440.webp 1440w, /images/tishino/statement-duotone-2000.webp 2000w",
-      "jpg": "/images/tishino/statement-duotone-640.jpg 640w, /images/tishino/statement-duotone-1024.jpg 1024w, /images/tishino/statement-duotone-1440.jpg 1440w, /images/tishino/statement-duotone-2000.jpg 2000w",
-      "fallback": "/images/tishino/statement-duotone-1024.jpg"
-    }
+    "fallback": "/images/tishino/statement-1024.jpg"
   },
   "/images/tishino/tubers.jpg": {
     "w": 6000,

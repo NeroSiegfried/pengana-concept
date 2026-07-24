@@ -115,7 +115,6 @@ export function ImageStatement({
         className={`image-statement__image image-statement__image--${position}`}
         src={image}
         alt={imageAlt}
-        duotone
         sizes="100vw"
       />
       <div className="image-statement__veil" />
@@ -192,7 +191,6 @@ export function SplitStory({
   flip = false,
   tone = "light",
   clip = false,
-  duotone = false,
 }) {
   const paragraphs = Array.isArray(text) ? text : text ? [text] : [];
   return (
@@ -205,7 +203,6 @@ export function SplitStory({
           <SmartImage
             src={image}
             alt={imageAlt}
-            duotone={duotone}
             sizes="(min-width: 900px) 45vw, 100vw"
           />
           {caption ? <span className="split-story__caption">{caption}</span> : null}

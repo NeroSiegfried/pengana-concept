@@ -52,12 +52,9 @@ const hex = (h) => ({
   g: parseInt(h.slice(3, 5), 16),
   b: parseInt(h.slice(5, 7), 16),
 });
-const DUOTONE = {
-  "group/statement.jpg": { shadow: hex("#101b26"), highlight: hex("#dfe7ed") },
-  "properties/statement.jpg": { shadow: hex("#281b15"), highlight: hex("#eadfd4") },
-  "tishino/statement.jpg": { shadow: hex("#1c2417"), highlight: hex("#e3e4d3") },
-  "sunab/statement.jpg": { shadow: hex("#0b1230"), highlight: hex("#d9def2") },
-};
+// Duotones were removed by request — plain colour images are used everywhere.
+// Restore entries here (see git history) to regenerate brand duotone variants.
+const DUOTONE = {};
 
 const WEBP = { quality: 74, effort: 5 };
 const JPG = { quality: 78, mozjpeg: true, progressive: true };

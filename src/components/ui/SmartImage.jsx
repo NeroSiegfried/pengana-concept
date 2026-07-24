@@ -1,5 +1,4 @@
 import { IMG } from "../../content/imageManifest.js";
-import { useDuotonePreview } from "./useDuotonePreview.js";
 
 // Renders a responsive <picture> from a resolved manifest entry. A tiny inlined
 // LQIP is painted as the element's background so something sharp-ish appears
@@ -27,23 +26,14 @@ function Picture({ entry, set, className = "", sizes, eager, alt = "", style, ..
   );
 }
 
-// TEMPORARY: statement bands alternate duotone <-> colour every 5s. See
-// useDuotonePreview.js for how to make the choice permanent.
-function PreviewToggleImage({ entry, ...rest }) {
-  const showDuotone = useDuotonePreview();
-  return <Picture entry={entry} set={showDuotone ? entry.duotone : entry} {...rest} />;
-}
-
 // Responsive, progressively-loaded image keyed by its stable "/images/…" path.
-// Pass `eager` for above-the-fold images (heroes) and `duotone` on the
-// statement bands to use the brand duotone variant when one exists.
+// Pass `eager` for above-the-fold images (heroes).
 export default function SmartImage({
   src,
   alt = "",
   className = "",
   sizes = "100vw",
   eager = false,
-  duotone = false,
   style,
   ...rest
 }) {
@@ -63,10 +53,7 @@ export default function SmartImage({
     );
   }
 
-  const shared = { entry, alt, className, sizes, eager, style, ...rest };
-
-  if (duotone && entry.duotone) {
-    return <PreviewToggleImage {...shared} />;
-  }
-  return <Picture set={entry} {...shared} />;
+  return (
+    <Picture set={entry} entry={entry} alt={alt} className={className} sizes={sizes} eager={eager} style={style} {...rest} />
+  );
 }
