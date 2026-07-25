@@ -14,7 +14,14 @@ export default function ScrollToTop() {
         target?.scrollIntoView({ block: "start" });
       });
     } else {
-      window.scrollTo(0, 0);
+      // Instant, not smooth: html has global scroll-behavior:smooth for
+      // in-page anchor links, but that would make a page-change reset glide
+      // from the old scroll position instead of snapping — and during that
+      // glide, Reveal's IntersectionObserver sees lower-page elements pass
+      // through the viewport and fires their entrance animation early. An
+      // instant jump lands the new page at top before Reveal ever observes
+      // it, so entrance animations always start from the intended state.
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     }
 
     if (previousPath.current !== pathname && !hash) {
