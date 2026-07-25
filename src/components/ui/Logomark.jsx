@@ -1,33 +1,19 @@
-// Pengana Concept logomark — a precise, regularised rebuild of the original
-// mark's own geometry: a small triangle in front of two overlapping ridges
-// (translated copies of one another) receding to the right, with a diamond
-// nestled in the summit notch. Built by decoding the original file's exact
-// path coordinates rather than by eye:
-//   - every long edge is exactly 45°;
-//   - the three gaps (triangle-to-ridge, ridge-to-ridge, ridge-to-diamond)
-//     are the same width, by construction (blue is green translated, and the
-//     diamond and triangle are positioned as exact parallel offsets of that
-//     same translation);
-//   - only 5 of the 14 corners are rounded, matching the original exactly:
-//     the small triangle's apex, each ridge's lower-left corner, and the
-//     diamond's top and bottom points. Every other corner — both base corners
-//     of the triangle, each ridge's apex/shoulder/lower-right, and the
-//     diamond's left/right points — stays sharp.
-// Single colour via currentColor so it adapts to every header/footer/overlay
-// context.
+// Pengana Concept logomark — exact paths from the source artwork (Untitled.svg),
+// recoloured to currentColor so it adapts to every header/footer/overlay
+// context. Geometry is untouched — do not "clean up" or re-derive it.
 export default function Logomark({ className = "" }) {
   return (
     <svg
       className={`logomark ${className}`.trim()}
-      viewBox="-6 -12 284 140"
+      viewBox="0 0 694 352"
       fill="currentColor"
       aria-hidden="true"
       focusable="false"
     >
-      <path d="M31.64 90.36 Q38 84 44.36 90.36 L72 118 L4 118 Z" />
-      <path d="M86 34 L52 68 L95.64 111.64 Q102 118 111 118 L170 118 Z" />
-      <path d="M184 34 L150 68 L193.64 111.64 Q200 118 209 118 L268 118 Z" />
-      <path d="M129.34 4.66 Q135 -1 140.66 4.66 L162 26 L140.66 47.34 Q135 53 129.34 47.34 L108 26 Z" />
+      <path d="M97.5918 244.856C109.03 232.78 128.261 232.78 139.699 244.856L190.929 298.937C190.937 298.946 190.946 298.955 190.954 298.964L237.291 347.88H0L47.6006 297.63L97.5918 244.856Z" />
+      <path d="M336.134 216.623C336.235 216.613 336.336 216.602 336.437 216.592L410.354 293.48L431.743 315.63H431.647L462.662 347.892L368.661 351.19C364.566 351.468 360.406 351.615 356.191 351.627L356.128 351.63L356.127 351.627C355.961 351.628 355.796 351.63 355.63 351.63C312.071 351.63 274.22 337.053 255.032 315.63H254.562L203.441 262.693L139.646 196.63L231.328 108.094L336.134 216.623Z" />
+      <path d="M568.691 222.464C568.79 222.454 568.89 222.444 568.989 222.434L641.987 295.996L663.111 317.188H663.017L693.646 348.054L600.813 351.209C596.77 351.475 592.661 351.616 588.499 351.627L588.436 351.63L588.435 351.627C588.272 351.628 588.108 351.63 587.944 351.63C544.927 351.63 507.546 337.683 488.597 317.188H488.134L374.646 203.336L465.188 118.63L568.691 222.464Z" />
+      <path d="M336.726 3.22182C341.022 -1.07394 347.987 -1.07394 352.282 3.22183L440.635 91.5742L361.785 170.424C357.489 174.72 350.524 174.72 346.228 170.424L257.876 82.0718L336.726 3.22182Z" />
     </svg>
   );
 }
