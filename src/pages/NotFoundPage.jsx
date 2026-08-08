@@ -6,10 +6,8 @@ export default function NotFoundPage() {
     <PageFrame site="concept" title="Page not found">
       <section className="not-found">
         <p>404</p>
-        <h1>This page is no longer part of the site.</h1>
-        <span>
-          The project was simplified around verified business information.
-        </span>
+        <h1>We couldn’t find that page.</h1>
+        <span>The address may be incorrect, or the page may not exist.</span>
         <ActionLink to="/" variant="solid">
           Return home
         </ActionLink>
