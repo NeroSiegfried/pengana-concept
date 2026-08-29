@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import Footer from "./components/chrome/Footer.jsx";
 import ScrollToTop from "./components/chrome/ScrollToTop.jsx";
 import SiteHeader from "./components/chrome/SiteHeader.jsx";
@@ -58,6 +59,7 @@ export default function App() {
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
+      <Analytics />
     </>
   );
 }
